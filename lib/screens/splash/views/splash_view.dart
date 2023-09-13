@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:job_finder_app/screens/on_boarding/views/on_boarding_view.dart';
 
 import '../widget/splash_view_body.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
+
   static const String id = 'splash_view';
 
   @override
@@ -28,7 +30,7 @@ class _SplashViewState extends State<SplashView> {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        // Navigator.pushNamed(context, OnBoardingView.id);
+        Navigator.pushNamed(context, OnBoardingView.id);
       },
     );
   }

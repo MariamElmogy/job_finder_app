@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:job_finder_app/utils/app_colors.dart';
 
+import 'screens/on_boarding/views/on_boarding_view.dart';
 import 'screens/splash/views/splash_view.dart';
 
 void main() {
@@ -14,8 +16,15 @@ class JobFinderApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Job Finder',
-      theme: ThemeData(),
-      home: const SplashView(),
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.kPrimaryColor,
+      ),
+      debugShowCheckedModeBanner: false,
+      routes: {
+        SplashView.id: (context) => const SplashView(),
+        OnBoardingView.id: (context) => const OnBoardingView(),
+      },
+      initialRoute: SplashView.id,
     );
   }
 }
