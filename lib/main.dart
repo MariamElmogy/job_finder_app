@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'screens/splash/views/splash_view.dart';
+
 void main() {
   runApp(const JobFinderApp());
 }
@@ -13,7 +15,7 @@ class JobFinderApp extends StatelessWidget {
     return MaterialApp(
       title: 'Job Finder',
       theme: ThemeData(),
-      home: const Scaffold(),
+      home: const SplashView(),
     );
   }
 }
