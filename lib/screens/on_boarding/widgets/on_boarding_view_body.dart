@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/screens/on_boarding/widgets/custom_button.dart';
+import 'package:job_finder_app/custom_widgets/custom_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../models/on_boarding_model.dart';
+import '../../register/views/register_view.dart';
 import 'custom_on_boarding_app_bar.dart';
 import 'custom_on_boarding_headlines.dart';
 import 'custom_on_boarding_subtitle.dart';
@@ -49,16 +50,13 @@ class OnBoardingViewBody extends StatelessWidget {
         CustomButton(
           onPressed: () {
             if (index == content.length - 1) {
-              // Navigator.pushNamed(context, RegisterView.id);
+              Navigator.pushNamed(context, RegisterView.id);
             }
             pageController.nextPage(
                 duration: const Duration(milliseconds: 100),
                 curve: Curves.bounceIn);
           },
-          child: Text(
-            (index == content.length - 1 ? "Get Started" : "Next"),
-            style: const TextStyle(color: Colors.white, fontSize: 16),
-          ),
+          text: (index == content.length - 1 ? "Get Started" : "Next"),
         ),
       ],
     );

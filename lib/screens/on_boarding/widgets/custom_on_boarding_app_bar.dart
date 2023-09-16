@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 import 'package:job_finder_app/utils/app_images.dart';
 
+import '../../register/views/register_view.dart';
+
 class CustomOnBoardingAppBar extends StatelessWidget {
   const CustomOnBoardingAppBar({super.key});
 
@@ -15,7 +17,8 @@ class CustomOnBoardingAppBar extends StatelessWidget {
           const Spacer(),
           GestureDetector(
             onTap: () {
-              // Navigator.pushNamed(context, RegisterView.id);
+              Navigator.pushNamed(context, 
+              RegisterView.id);
             },
             child: const Text(
               'Skip',
