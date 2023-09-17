@@ -11,6 +11,7 @@ import '../../../custom_widgets/build_divider.dart';
 import '../../../custom_widgets/custom_textfield.dart';
 import '../../../custom_widgets/social_register.dart';
 import '../../../utils/app_colors.dart';
+import '../../login/views/login_view.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -21,7 +22,6 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
-
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   UserModel userModel = UserModel();
   bool isPasswordCorrect = true;
@@ -33,107 +33,94 @@ class _RegisterFormState extends State<RegisterForm> {
     return Form(
       key: _formKey,
       autovalidateMode: autovalidateMode,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // name textfield
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                CustomTextField(
-                  hintText: 'name',
-                  image: AppImages.kProfile,
-                  isPasswordCorrect: isPasswordCorrect,
-                  onSaved: (value) {
-                    userModel.name = value!;
-                  },
-                ),
-                const SizedBox(height: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // name textfield
+          CustomTextField(
+            hintText: 'name',
+            image: AppImages.kProfile,
+            isPasswordCorrect: isPasswordCorrect,
+            onSaved: (value) {
+              userModel.name = value!;
+            },
+          ),
+          const SizedBox(height: 16),
 
-                // email textfield
-                CustomTextField(
-                  hintText: 'Email',
-                  image: AppImages.kEmail,
-                  isPasswordCorrect: isPasswordCorrect,
-                  onSaved: (value) {
-                    userModel.email = value!;
-                  },
-                ),
-                const SizedBox(height: 16),
+          // email textfield
+          CustomTextField(
+            hintText: 'Email',
+            image: AppImages.kEmail,
+            isPasswordCorrect: isPasswordCorrect,
+            onSaved: (value) {
+              userModel.email = value!;
+            },
+          ),
+          const SizedBox(height: 16),
 
-                // password textfield
-                CustomTextField(
-                  hintText: 'Password',
-                  image: AppImages.kPassword,
-                  isPasswordCorrect: isPasswordCorrect,
-                  onSaved: (value) {
-                    userModel.password = value!;
-                  },
-                  onChanged: (value) {
-                    setState(() {
-                      isPasswordCorrect = false;
-                      if (value.length >= 8) {
-                        isPasswordCorrect = true;
-                        passwordErrorColor = const Color(0xff60C631);
-                        userModel.password = value;
-                      } else {
-                        isPasswordCorrect = false;
-                        passwordErrorColor = const Color(0xffFF472B);
-                      }
-                      isButtonEnabled = isPasswordCorrect;
-                    });
-                  },
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  'Password must be at least 8 characters',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: passwordErrorColor,
-                    fontFamily: AppFonts.kRegisterHintFont,
-                  ),
-                ),
-              ],
+          // password textfield
+          CustomTextField(
+            hintText: 'Password',
+            image: AppImages.kPassword,
+            isPasswordCorrect: isPasswordCorrect,
+            onSaved: (value) {
+              userModel.password = value!;
+            },
+            onChanged: (value) {
+              setState(() {
+                isPasswordCorrect = false;
+                if (value.length >= 8) {
+                  isPasswordCorrect = true;
+                  passwordErrorColor = const Color(0xff60C631);
+                  userModel.password = value;
+                } else {
+                  isPasswordCorrect = false;
+                  passwordErrorColor = const Color(0xffFF472B);
+                }
+                isButtonEnabled = isPasswordCorrect;
+              });
+            },
+          ),
+          const SizedBox(height: 10),
+          Text(
+            'Password must be at least 8 characters',
+            style: TextStyle(
+              fontSize: 16,
+              color: passwordErrorColor,
+              fontFamily: AppFonts.kRegisterHintFont,
             ),
+          ),
 
-            const SizedBox(
-              height: 95,
-            ),
+          const SizedBox(
+            height: 95,
+          ),
 
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Center(
-                  child: AuthAuthenticationOption(
-                      action: 'Login',
-                      onPressed: () {
-                        // Navigator.pushNamed(context, LoginView.id);
-                      },
-                      text: 'Already have an account?'),
-                ),
-                CustomRegisterButton(
-                  isButtonEnabled: isButtonEnabled,
-                  text: "Create account",
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState?.save();
-                      BlocProvider.of<RegisterCubit>(context)
-                          .registerUser(userModel);
-                    } else {
-                      setState(() {
-                        autovalidateMode = AutovalidateMode.always;
-                      });
-                    }
-                  },
-                ),
-                const BuildDivier(text: 'Or Sign up With Account'),
-                const SocialRegister(),
-              ],
-            ),
-          ],
-        ),
+          Center(
+            child: AuthAuthenticationOption(
+                action: 'Login',
+                onPressed: () {
+                  Navigator.pushNamed(context, LoginView.id);
+                },
+                text: 'Already have an account?'),
+          ),
+          CustomRegisterButton(
+            isButtonEnabled: isButtonEnabled,
+            text: "Create account",
+            onPressed: () async {
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState?.save();
+                BlocProvider.of<RegisterCubit>(context)
+                    .registerUser(userModel);
+              } else {
+                setState(() {
+                  autovalidateMode = AutovalidateMode.always;
+                });
+              }
+            },
+          ),
+          const BuildDivier(text: 'Or Sign up With Account'),
+          const SocialRegister(),
+        ],
       ),
     );
   }

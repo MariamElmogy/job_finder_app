@@ -11,15 +11,18 @@ class RegisterViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          CustomRegisterAppBar(),
-          CustomTitle(title: 'Create Account'),
-          CustomSubtitle(
-              subtitle: 'Please create an account to find your dream job'),
-          RegisterForm(),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            CustomRegisterAppBar(),
+            CustomTitle(title: 'Create Account'),
+            CustomSubtitle(
+                subtitle: 'Please create an account to find your dream job'),
+            RegisterForm(),
+          ],
+        ),
       ),
     );
   }

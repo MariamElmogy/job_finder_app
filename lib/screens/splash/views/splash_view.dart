@@ -1,7 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/screens/on_boarding/views/on_boarding_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../utils/constants.dart';
+import '../../work_suggestions/views/work_suggestions_view.dart';
 import '../widget/splash_view_body.dart';
 
 class SplashView extends StatefulWidget {
@@ -26,11 +30,20 @@ class _SplashViewState extends State<SplashView> {
     return const SplashViewBody();
   }
 
-  void navigationControl() {
+// home:
+  void navigationControl() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var email = prefs.getString(kEmail);
+    log(email.toString());
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        Navigator.pushNamed(context, OnBoardingView.id);
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext ctx) => email == null
+                    ? const OnBoardingView()
+                    : const WorkSuggestionsView()));
       },
     );
   }
