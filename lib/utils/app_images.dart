@@ -34,8 +34,11 @@ abstract class AppImages {
   static const kNotificationIcon = 'assets/images/notification.png';
   static const kZoomLogo = 'assets/images/zoom_logo.png';
   static const kArchiveMinus = 'assets/images/archive-minus.png';
-
+  static const kApply = 'assets/images/apply.png';
+  static const kSearch = 'assets/images/search.png';
+  static const kMessage = 'assets/images/message.png';
+  static const kArchive = 'assets/images/archive.png';
   
-  
+  static const kHome = 'assets/images/home.png';
   
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job_finder_app/screens/home/views/home_view.dart';
 import 'package:job_finder_app/screens/login/views/login_view.dart';
 import 'package:job_finder_app/screens/register/views/register_view.dart';
 import 'package:job_finder_app/screens/work_suggestions/views/work_suggestions_view.dart';
@@ -35,6 +36,7 @@ class JobFinderApp extends StatelessWidget {
         RegisterView.id: (context) => const RegisterView(),
         LoginView.id: (context) => const LoginView(),
         WorkSuggestionsView.id: (context) => const WorkSuggestionsView(),
+        HomeView.id: (context) => const HomeView(),
       },
       initialRoute: SplashView.id,
     );

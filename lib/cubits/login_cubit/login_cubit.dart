@@ -31,8 +31,6 @@ class LoginCubit extends Cubit<LoginState> {
         var data = jsonDecode(response.body.toString());
         log(data.toString());
         log(data['token']);
-        // log(data['user']['id'].toString());
-        // log(data['id'].toString());
         log('Login successfully');
         preferences.setString(kUserToken, data['token']);
 
