@@ -18,8 +18,6 @@ class ApplyJobForm extends StatefulWidget {
 }
 
 class _ApplyJobFormState extends State<ApplyJobForm> {
-  // final _formKey = GlobalKey<FormState>();
-  // AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   late String email, fullName, phone;
 
   @override

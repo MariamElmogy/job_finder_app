@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../custom_widgets/custom_button.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_fonts.dart';
-import 'package:dotted_line/dotted_line.dart';
 
 import '../widgets/apply_job_form.dart';
+import '../widgets/applying_process.dart';
 
 class ApplyJobView extends StatefulWidget {
   const ApplyJobView({super.key});
@@ -104,136 +104,6 @@ class _ApplyJobViewState extends State<ApplyJobView> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class ApplyingProcess extends StatefulWidget {
-  const ApplyingProcess({
-    super.key,
-    required this.currentStep,
-    required this.totalSteps,
-    required this.stepCompletionStatus,
-  });
-
-  final int currentStep;
-  final int totalSteps;
-  final List<bool> stepCompletionStatus;
-
-  @override
-  State<ApplyingProcess> createState() => _ApplyingProcessState();
-}
-
-class _ApplyingProcessState extends State<ApplyingProcess> {
-  List<String> text = ['Biodata', 'Type of work', 'Upload portfolio'];
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(
-        widget.totalSteps,
-        (index) => Row(
-          children: [
-            StepCircle(
-              isDone: widget.stepCompletionStatus[index],
-              number: index + 1,
-              isActive: index + 1 == widget.currentStep,
-              text: text[index],
-            ),
-            if (index != widget.totalSteps - 1)
-              CustomDots(
-                isActive: index + 1 == widget.currentStep,
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class CustomDots extends StatelessWidget {
-  const CustomDots({
-    super.key,
-    required this.isActive,
-  });
-
-  final bool isActive;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: DottedLine(
-        direction: Axis.horizontal,
-        alignment: WrapAlignment.center,
-        lineLength: MediaQuery.of(context).size.width * 0.08,
-        lineThickness: 1.0,
-        dashLength: 4.0,
-        dashColor: isActive ? const Color(0xff3366FF) : const Color(0xff9CA3AF),
-        dashGapLength: 4.0,
-        dashGapColor: Colors.white,
-      ),
-    );
-  }
-}
-
-class StepCircle extends StatelessWidget {
-  final int number;
-  final bool isActive;
-  final bool isDone;
-  final String text;
-
-  const StepCircle({
-    super.key,
-    required this.number,
-    required this.isActive,
-    required this.isDone,
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CircleAvatar(
-          radius: 23,
-          backgroundColor: isActive
-              ? const Color(0xff3366FF)
-              : isDone
-                  ? const Color(0xff3366FF)
-                  : const Color(0xff9CA3AF),
-          child: CircleAvatar(
-              radius: 22,
-              foregroundColor: isActive
-                  ? const Color(0xff3366FF)
-                  : isDone
-                      ? const Color(0xff3366FF)
-                      : const Color(0xff9CA3AF),
-              backgroundColor: isActive
-                  ? Colors.white
-                  : isDone
-                      ? const Color(0xff3366FF)
-                      : Colors.white,
-              child: isDone
-                  ? const Icon(
-                      Icons.done,
-                      color: Colors.white,
-                    )
-                  : Text(number.toString())),
-        ),
-        const SizedBox(height: 5),
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 12,
-            color: isActive
-                  ? const Color(0xff3366FF)
-                  : isDone
-                      ? const Color(0xff3366FF)
-                      : const Color(0xff9CA3AF),
-          ),
-        ),
-      ],
     );
   }
 }
