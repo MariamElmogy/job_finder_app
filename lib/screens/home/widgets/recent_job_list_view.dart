@@ -1,6 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:job_finder_app/models/jobs_model.dart';
 import 'package:job_finder_app/screens/home/widgets/recent_job.dart';
+
+import '../../job_details/views/job_details_view.dart';
 
 class RecentJobListView extends StatelessWidget {
   const RecentJobListView({
@@ -20,7 +22,16 @@ class RecentJobListView extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             var currentJob = jobsModel[index];
-            //
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return JobDetailsView(
+                    job: currentJob,
+                  );
+                },
+              ),
+            );
           },
           child: RecentJob(
             job: jobsModel[index],

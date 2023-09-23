@@ -53,6 +53,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      
       decoration: InputDecoration(
         // 1- the icon and the hint text
         // the text in the text field

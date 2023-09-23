@@ -47,6 +47,9 @@ dependencies:
   chopper: ^6.1.4
   device_preview: ^1.1.0
   google_sign_in: ^6.1.5
+  toggle_switch: ^2.1.0
+  dotted_line: ^3.2.2
+  intl_phone_field: ^3.2.0
 
 dev_dependencies:
   flutter_test:
