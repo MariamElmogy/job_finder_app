@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/custom_widgets/custom_button.dart';
 import 'package:job_finder_app/custom_widgets/custom_textfield.dart';
+import 'package:job_finder_app/services/user_api_service.dart';
 import 'package:job_finder_app/utils/app_colors.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 
@@ -65,8 +66,7 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
             if (formKey.currentState!.validate()) {
               formKey.currentState?.save();
 
-              getOtp(email: email.trim());
-              // log('email =  ${email.trim()}');
+              UserApiService.getOtp(email: email.trim());
 
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {

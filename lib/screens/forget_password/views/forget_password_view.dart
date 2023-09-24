@@ -45,27 +45,3 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
   }
 }
 
-Future<void> getOtp({required String email}) async {
-  try {
-    HttpClient httpClient = HttpClient();
-    httpClient.badCertificateCallback =
-        ((X509Certificate cert, String host, int port) => true);
-    Client client = IOClient(httpClient);
-
-    const url = '$baseUrl/auth/otp';
-    final response = await client.post(
-      Uri.parse(url),
-      body: {
-        // 'password': user.password,
-        'email': email,
-      },
-    );
-
-    if (response.statusCode == 200) {
-      json.decode(response.body);
-      log(jsonEncode(json.decode(response.body)));
-    }
-  } catch (e) {
-    log('error = ${e.toString()}');
-  }
-}

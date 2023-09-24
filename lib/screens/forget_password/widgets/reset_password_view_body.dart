@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/custom_widgets/custom_button.dart';
 import 'package:job_finder_app/custom_widgets/custom_textfield.dart';
+import 'package:job_finder_app/services/user_api_service.dart';
 import 'package:job_finder_app/utils/app_colors.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/user_model.dart';
 import '../../../utils/app_images.dart';
 import '../widgets/check_email.dart';
-import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
-
-import 'package:http/http.dart';
-import 'package:http/io_client.dart';
-
-import '../../../utils/constants.dart';
 
 class ResetPasswordViewBody extends StatefulWidget {
   const ResetPasswordViewBody({super.key});
@@ -90,7 +82,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
               formKey.currentState?.save();
 
               if (password == confirmPassword) {
-                updatePassword(password: password.trim());
+                UserApiService.updatePassword(password: password.trim());
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
                     return const CheckEmail();
@@ -105,11 +97,6 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                   ),
                 );
               }
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return const CheckEmail();
-                },
-              ));
             } else {
               setState(() {
                 autovalidateMode = AutovalidateMode.always;
@@ -120,31 +107,5 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
         ),
       ],
     );
-  }
-}
-
-Future<void> updatePassword({required String password}) async {
-  try {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    HttpClient httpClient = HttpClient();
-    httpClient.badCertificateCallback =
-        ((X509Certificate cert, String host, int port) => true);
-    Client client = IOClient(httpClient);
-    const url = '$baseUrl/auth/user/update';
-    final response = await client.post(
-      Uri.parse(url),
-      headers: {
-        'Authorization': 'Bearer ${preferences.getString(kUserToken)}',
-      },
-      body: {
-        'password': password,
-      },
-    );
-
-    if (response.statusCode == 200) {
-      json.decode(response.body);
-    }
-  } catch (e) {
-    log('error = ${e.toString()}');
   }
 }
