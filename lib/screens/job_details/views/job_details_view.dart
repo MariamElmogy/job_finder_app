@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:job_finder_app/custom_widgets/custom_button.dart';
 import 'package:job_finder_app/models/jobs_model.dart';
 import 'package:job_finder_app/screens/apply_job/views/apply_job_view.dart';
+import 'package:job_finder_app/screens/job_details/widgets/job_details_view_body.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 import 'package:job_finder_app/utils/app_images.dart';
 import '../widgets/company_detail.dart';
@@ -10,19 +11,10 @@ import '../widgets/job_detail.dart';
 import '../widgets/job_information.dart';
 import '../widgets/people_applied.dart';
 
-class JobDetailsView extends StatefulWidget {
+class JobDetailsView extends StatelessWidget {
   const JobDetailsView({super.key, required this.job});
 
   final JobsModel job;
-
-  @override
-  State<JobDetailsView> createState() => _JobDetailsViewState();
-}
-
-class _JobDetailsViewState extends State<JobDetailsView> {
-  List<String> labels = ['Desicription', 'Company', 'People'];
-
-  int counter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -46,38 +38,10 @@ class _JobDetailsViewState extends State<JobDetailsView> {
           Image.asset(AppImages.kArchive),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: JobInformation(job: widget.job),
-            ),
-            SliverToBoxAdapter(
-              child: JobDetail(
-                counter: counter,
-                labels: labels,
-                onToggle: (index) {
-                  setState(
-                    () {
-                      counter = index!;
-                    },
-                  );
-                },
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: counter == 0
-                  ? JobDescription(
-                      job: widget.job,
-                    )
-                  : counter == 1
-                      ? CompanyDetail(
-                          job: widget.job,
-                        )
-                      : PeopleApplied(widget: widget),
-            ),
-          ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: JobDetailsViewBody(job: job),
         ),
       ),
       floatingActionButton: Padding(

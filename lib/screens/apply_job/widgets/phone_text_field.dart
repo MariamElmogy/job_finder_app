@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 
 import '../../../utils/app_colors.dart';
-import 'apply_job_form.dart';
 
 class PhoneTextField extends StatelessWidget {
   const PhoneTextField({
     super.key,
-    required this.widget,
+    required this.autovalidateMode,
+    this.onSaved,
   });
 
-  final ApplyJobForm widget;
+  final AutovalidateMode autovalidateMode;
+  final void Function(PhoneNumber?)? onSaved;
 
   @override
   Widget build(BuildContext context) {
     return IntlPhoneField(
-      autovalidateMode: widget.autovalidateMode,
+      autovalidateMode: autovalidateMode,
       validator: (value) {
         if (value == null || !value.isValidNumber()) {
           return 'Please enter your phone';
@@ -25,8 +27,8 @@ class PhoneTextField extends StatelessWidget {
         return null;
       },
       decoration: const InputDecoration(
-        labelText: 'No.Handphone',
-        labelStyle: TextStyle(
+        hintText: 'No.Handphone',
+        hintStyle: TextStyle(
           color: AppColors.kRegisterHints,
           fontSize: 14,
           fontFamily: AppFonts.kRegisterHintFont,
@@ -57,10 +59,8 @@ class PhoneTextField extends StatelessWidget {
           ),
         ),
       ),
-      initialCountryCode: 'IN',
-      onChanged: (phone) {
-        // print(phone.completeNumber);
-      },
+      initialCountryCode: 'EG',
+      onSaved: onSaved,
       disableLengthCheck: true,
       dropdownIconPosition: IconPosition.trailing,
       flagsButtonPadding: const EdgeInsets.only(left: 8),

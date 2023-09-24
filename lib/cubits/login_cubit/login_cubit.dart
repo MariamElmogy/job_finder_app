@@ -15,7 +15,7 @@ part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
-  void login(String email, password) async {
+  Future<void> login({required String email, required String password}) async {
     emit(LoginLoading());
     try {
       HttpClient httpClient = HttpClient();
@@ -29,10 +29,12 @@ class LoginCubit extends Cubit<LoginState> {
 
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body.toString());
-        log(data.toString());
-        log(data['token']);
-        log('Login successfully');
+        log('data in the cubit login ${data.toString()}');
+        // log(data['token']);
+        // log(data['id']);
+        // log('Login successfully');
         preferences.setString(kUserToken, data['token']);
+        preferences.setInt(kUserId, data['user']['id']);
 
         emit(LoginSuccess());
       } else {
@@ -40,7 +42,7 @@ class LoginCubit extends Cubit<LoginState> {
         LoginFailure(errMessage: "failed");
       }
     } catch (e) {
-      log(e.toString());
+      log('an error in login cubit ${e.toString()}');
       LoginFailure(errMessage: e.toString());
     }
   }

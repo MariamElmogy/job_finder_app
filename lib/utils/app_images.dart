@@ -29,7 +29,8 @@ abstract class AppImages {
   static const kSuccessAccount = 'assets/images/success_account.png';
   static const kFacebookLogo = 'assets/images/Facebook.png';
   static const kGoogleLogo = 'assets/images/google.png';
-  static const kPasswordSuccesfullyIlustration = 'assets/images/Password_Succesfully_Ilustration.png';
+  static const kPasswordSuccesfullyIlustration =
+      'assets/images/Password_Succesfully_Ilustration.png';
   static const kEmailIlustration = 'assets/images/Email_Ilustration.png';
   static const kNotificationIcon = 'assets/images/notification.png';
   static const kZoomLogo = 'assets/images/zoom_logo.png';
@@ -38,7 +39,6 @@ abstract class AppImages {
   static const kSearch = 'assets/images/search.png';
   static const kMessage = 'assets/images/message.png';
   static const kArchive = 'assets/images/archive.png';
-  
+  static const kProfileUser = 'assets/images/dimas_profile.png';
   static const kHome = 'assets/images/home.png';
-  
 }

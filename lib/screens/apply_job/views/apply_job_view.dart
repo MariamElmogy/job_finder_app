@@ -30,11 +30,9 @@ class _ApplyJobViewState extends State<ApplyJobView> {
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: const SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: ApplyJobViewBody(),
-          ),
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: ApplyJobViewBody(),
         ),
       ),
     );

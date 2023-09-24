@@ -1,30 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:job_finder_app/models/apply_job_model.dart';
 import 'package:job_finder_app/screens/apply_job/widgets/phone_text_field.dart';
 
+import '../../../custom_widgets/custom_button.dart';
 import '../../../custom_widgets/custom_textfield.dart';
+import '../../../services/job_api_service.dart';
 import '../../../utils/app_images.dart';
 import 'apply_form_title.dart';
 
 class ApplyJobForm extends StatefulWidget {
   const ApplyJobForm({
     super.key,
-    required this.formkey,
-    required this.autovalidateMode,
+    // required this.currentStep,
+    // required this.totalSteps,
+    // required this.onNextStep,
+    // required this.stepCompletionStatus,
   });
-  final Key formkey;
-  final AutovalidateMode autovalidateMode;
+
+  // final int currentStep;
+  // final int totalSteps;
+  // final VoidCallback onNextStep; // Define the callback function type
+  // final List<bool> stepCompletionStatus;
+
   @override
   State<ApplyJobForm> createState() => _ApplyJobFormState();
 }
 
 class _ApplyJobFormState extends State<ApplyJobForm> {
-  late String email, fullName, phone;
+//
+  final _formKey = GlobalKey<FormState>();
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  ApplyJobsModel applyJobs = ApplyJobsModel();
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: widget.formkey,
-      autovalidateMode: widget.autovalidateMode,
+      key: _formKey,
+      autovalidateMode: autovalidateMode,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -34,7 +46,7 @@ class _ApplyJobFormState extends State<ApplyJobForm> {
             image: AppImages.kProfile,
             isPasswordCorrect: true,
             onSaved: (value) {
-              fullName = value!.trim();
+              applyJobs.name = value!.trim();
             },
           ),
 
@@ -45,7 +57,7 @@ class _ApplyJobFormState extends State<ApplyJobForm> {
             image: AppImages.kEmail,
             isPasswordCorrect: true,
             onSaved: (value) {
-              email = value!.trim();
+              applyJobs.email = value!.trim();
             },
           ),
 
@@ -53,27 +65,36 @@ class _ApplyJobFormState extends State<ApplyJobForm> {
             title: 'No.Handphone',
           ),
 
-          // CustomTextField(
-          //   hintText: 'No.Handphone',
-          //   image: AppImages.kUSAflag,
-          //   isPasswordCorrect: true,
-          //   onSaved: (value) {
-          //     phone = value!.trim();
-          //   },
-          // ),
-          PhoneTextField(widget: widget)
-
+          PhoneTextField(
+            autovalidateMode: autovalidateMode,
+            onSaved: (value) {
+              applyJobs.mobile = value!.number.toString().trim();
+            },
+          ),
           // CustomButton(
-          //     onPressed: () async {
+          //     onPressed: () {
           //       if (_formKey.currentState!.validate()) {
           //         _formKey.currentState?.save();
+          //         try {
+          //           JobApiService.applyJob(applyJobs);
+          //           widget.stepCompletionStatus[widget.currentStep - 1] = true;
+
+          //           if (widget.currentStep < widget.totalSteps) {
+          //             setState(() {
+          //               widget.onNextStep();
+          //             });
+          //           }
+          //         } catch (error) {
+          //           print('API request failed: $error');
+          //           widget.stepCompletionStatus[widget.currentStep - 1] = false;
+          //         }
           //       } else {
           //         setState(() {
           //           autovalidateMode = AutovalidateMode.always;
           //         });
           //       }
           //     },
-          //     text: 'Next'),
+          //     text: widget.currentStep < widget.totalSteps ? 'Next' : 'Submit'),
         ],
       ),
     );

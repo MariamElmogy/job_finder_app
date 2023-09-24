@@ -10,6 +10,7 @@ import '../../../custom_widgets/auth_authentication_option.dart';
 import '../../../custom_widgets/build_divider.dart';
 import '../../../custom_widgets/social_register.dart';
 import '../../../utils/app_colors.dart';
+import '../../forget_password/views/forget_password_view.dart';
 import '../../register/views/register_view.dart';
 import '../../register/widgets/custom_register_button.dart';
 
@@ -47,6 +48,8 @@ class _LoginFormState extends State<LoginForm> {
               },
               onChanged: (value) {
                 setState(() {
+                  email = value.trim();
+
                   isButtonEnabled = isPasswordCorrect;
                 });
               },
@@ -64,6 +67,7 @@ class _LoginFormState extends State<LoginForm> {
               },
               onChanged: (value) {
                 setState(() {
+                  password = value.trim();
                   isButtonEnabled = isPasswordCorrect;
                 });
               },
@@ -98,7 +102,11 @@ class _LoginFormState extends State<LoginForm> {
                 const Spacer(),
                 GestureDetector(
                   onTap: () {
-                    // Navigator.pushNamed(context, ForgetPasswordView.id);
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return const ForgetPasswordView();
+                      },
+                    ));
                   },
                   child: const Text(
                     'Forgot Password?',
@@ -126,7 +134,8 @@ class _LoginFormState extends State<LoginForm> {
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState?.save();
-                  BlocProvider.of<LoginCubit>(context).login(email, password);
+                  BlocProvider.of<LoginCubit>(context)
+                      .login(email: email, password: password);
                   if (isCheckedRememberMe == true) {
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
