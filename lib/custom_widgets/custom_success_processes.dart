@@ -5,9 +5,16 @@ import '../../../custom_widgets/custom_button.dart';
 import '../../../utils/app_fonts.dart';
 import '../../../utils/app_images.dart';
 
-class CheckEmail extends StatelessWidget {
-  const CheckEmail({super.key});
-
+class CustomSuccessProcesses extends StatelessWidget {
+  const CustomSuccessProcesses(
+      {super.key,
+      required this.title,
+      required this.subtitle,
+      required this.image, required this.buttonText});
+  final String title;
+  final String subtitle;
+  final String image;
+  final String buttonText;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,13 +23,13 @@ class CheckEmail extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(AppImages.kSuccessAccount),
+            Image.asset(image),
             const SizedBox(
               height: 20,
             ),
-            const Text(
-              'Check your Email',
-              style: TextStyle(
+            Text(
+              title,
+              style: const TextStyle(
                   fontSize: 24,
                   fontFamily: AppFonts.kRegisterHeadlineFont,
                   color: Color(0xff111827)),
@@ -30,11 +37,11 @@ class CheckEmail extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                'We have sent a reset password to your email address',
-                style: TextStyle(
+                subtitle,
+                style: const TextStyle(
                   fontSize: 14,
                   color: Color(0xff6B7280),
                   fontFamily: AppFonts.kRegisterHintFont,
@@ -48,7 +55,7 @@ class CheckEmail extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
         child: CustomButton(
-          text: 'Get Started',
+          text: buttonText,
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(
               builder: (context) {

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/custom_widgets/custom_button.dart';
+import 'package:job_finder_app/custom_widgets/custom_success_processes.dart';
 import 'package:job_finder_app/custom_widgets/custom_textfield.dart';
 import 'package:job_finder_app/services/user_api_service.dart';
 import 'package:job_finder_app/utils/app_colors.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 
-import '../../../models/user_model.dart';
 import '../../../utils/app_images.dart';
-import '../widgets/check_email.dart';
 
 class ResetPasswordViewBody extends StatefulWidget {
   const ResetPasswordViewBody({super.key});
@@ -25,7 +24,6 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
     late String password;
     late String confirmPassword;
 
-    UserModel userModel = UserModel();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -50,32 +48,61 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
           ),
         ),
         const SizedBox(height: 20),
-        Form(
-          key: formKey,
-          autovalidateMode: autovalidateMode,
-          child: Column(
-            children: [
-              CustomTextField(
-                hintText: 'Enter your new password...',
-                image: AppImages.kPassword,
-                isPasswordCorrect: true,
-                onSaved: (value) {
-                  // password = 123
-                  password = value!.trim();
-                },
+        Column(
+          children: [
+            Form(
+              key: formKey,
+              autovalidateMode: autovalidateMode,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomTextField(
+                    hintText: 'Enter your new password...',
+                    image: AppImages.kPassword,
+                    isPasswordCorrect: true,
+                    onSaved: (value) {
+                      password = value!.trim();
+                    },
+                  ),
+                  // const SizedBox(height: 5),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(
+                      'Password must be at least 8 characters',
+                      style: TextStyle(
+                        color: Color(0xff9CA3AF),
+                        fontSize: 16,
+                        fontFamily: AppFonts.kLoginSubHeadlineFont,
+                      ),
+                    ),
+                  ),
+                  // const SizedBox(height: 8),
+                  CustomTextField(
+                    hintText: 'Rewrite your new password...',
+                    image: AppImages.kPassword,
+                    isPasswordCorrect: true,
+                    onSaved: (value) {
+                      confirmPassword = value!.trim();
+                    },
+                  ),
+                  // const SizedBox(height: 5),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(
+                      'Both password must match',
+                      style: TextStyle(
+                        color: Color(0xff9CA3AF),
+                        fontSize: 16,
+                        fontFamily: AppFonts.kLoginSubHeadlineFont,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              CustomTextField(
-                hintText: 'Rewrite your new password...',
-                image: AppImages.kEmail,
-                isPasswordCorrect: true,
-                onSaved: (value) {
-                  // confirmPassword = 666
-                  confirmPassword = value!.trim();
-                },
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
+        const Spacer(),
         CustomButton(
           onPressed: () {
             if (formKey.currentState!.validate()) {
@@ -85,7 +112,13 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                 UserApiService.updatePassword(password: password.trim());
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return const CheckEmail();
+                    return const CustomSuccessProcesses(
+                      buttonText: 'Open email app',
+                      image: AppImages.kPasswordSuccesfullyIlustration,
+                      subtitle:
+                          'Your password has been changed successfully, we will let you know if there are more problems with your account',
+                      title: 'Password changed succesfully!',
+                    );
                   },
                 ));
               } else {
@@ -103,7 +136,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
               });
             }
           },
-          text: 'Request password reset',
+          text: 'Request password',
         ),
       ],
     );

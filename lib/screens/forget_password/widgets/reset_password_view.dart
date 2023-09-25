@@ -3,14 +3,19 @@ import 'package:job_finder_app/screens/forget_password/widgets/reset_password_vi
 
 import '../../../utils/app_images.dart';
 
-class ResetPasswordView extends StatelessWidget {
+class ResetPasswordView extends StatefulWidget {
   const ResetPasswordView({super.key});
 
+  @override
+  State<ResetPasswordView> createState() => _ResetPasswordViewState();
+}
+
+class _ResetPasswordViewState extends State<ResetPasswordView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 70,
+        toolbarHeight: 55,
         elevation: 0,
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Colors.black),
@@ -24,11 +29,12 @@ class ResetPasswordView extends StatelessWidget {
           ),
         ],
       ),
-      body: const SingleChildScrollView(
-          child: Padding(
-        padding: EdgeInsets.all(16),
-        child: ResetPasswordViewBody(),
-      )),
+      body: const SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(top: 16, left: 16, right: 16),
+          child: ResetPasswordViewBody(),
+        ),
+      ),
     );
   }
 }

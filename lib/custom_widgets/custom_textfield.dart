@@ -53,7 +53,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      
       decoration: InputDecoration(
         // 1- the icon and the hint text
         // the text in the text field
@@ -119,7 +118,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
 
         // 5- if the text field is for the password
-        suffixIcon: widget.hintText == 'Password'
+        suffixIcon: (widget.hintText == 'Password' ||
+                widget.hintText.contains('password'))
             ? IconButton(
                 icon: isObscure
                     ? Icon(
@@ -145,7 +145,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
       // 6- to check if I want the entered data to be shown
       // if the user reach to password text field then obscur the text
-      obscureText: widget.hintText == 'Password' ? isObscure : !isObscure,
+      obscureText: (widget.hintText == 'Password' ||
+              widget.hintText.contains('password'))
+          ? isObscure
+          : !isObscure,
 
       // 8- initial the focus node
       focusNode: _textFieldFocusNode,

@@ -1,15 +1,7 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:http/io_client.dart';
 import 'package:job_finder_app/screens/forget_password/widgets/forget_password_view_body.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/app_images.dart';
-import '../../../utils/constants.dart';
 
 class ForgetPasswordView extends StatefulWidget {
   const ForgetPasswordView({super.key});
@@ -37,11 +29,12 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
           ),
         ],
       ),
-      body: const SingleChildScrollView(
+      body: const SafeArea(
         child: Padding(
-            padding: EdgeInsets.all(16.0), child: ForgetPasswordViewBody()),
+          padding: EdgeInsets.all(16.0),
+          child: ForgetPasswordViewBody(),
+        ),
       ),
     );
   }
 }
-
