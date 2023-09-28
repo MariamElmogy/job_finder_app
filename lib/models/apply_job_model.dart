@@ -22,7 +22,6 @@ class ApplyJobsModel {
   });
 
   factory ApplyJobsModel.fromJson(Map<String, dynamic> json) {
-    
     return ApplyJobsModel(
       cv_file: json['cv_file'],
       name: json['name'],

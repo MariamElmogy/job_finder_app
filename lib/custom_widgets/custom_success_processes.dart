@@ -10,11 +10,13 @@ class CustomSuccessProcesses extends StatelessWidget {
       {super.key,
       required this.title,
       required this.subtitle,
-      required this.image, required this.buttonText});
+      required this.image,
+      required this.buttonText, this.onPressed});
   final String title;
   final String subtitle;
   final String image;
   final String buttonText;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,13 +58,7 @@ class CustomSuccessProcesses extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: CustomButton(
           text: buttonText,
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(
-              builder: (context) {
-                return const ResetPasswordView();
-              },
-            ));
-          },
+          onPressed: onPressed,
         ),
       ),
     );

@@ -1,119 +1,82 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/screens/work_suggestions/views/work_suggestions_view.dart';
-import 'package:job_finder_app/utils/app_colors.dart';
+import 'package:get/get.dart';
+import 'package:job_finder_app/screens/home/views/main_wrapper_controller.dart';
+import 'package:job_finder_app/screens/profile/views/profile_view.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import '../../../utils/app_images.dart';
 import '../widgets/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  HomeView({super.key});
 
   static const String id = 'home_view';
+  final MainWrapperController controller = Get.put(MainWrapperController());
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: HomeViewBody(),
+        child: PageView(
+          controller: controller.pageController,
+          children: const [
+            HomeViewBody(),
+            ProfileView(),
+          ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
-    );
-  }
-}
-
-class CustomBottomNavigationBar extends StatefulWidget {
-  const CustomBottomNavigationBar({super.key});
-
-  @override
-  State<CustomBottomNavigationBar> createState() =>
-      _CustomBottomNavigationBarState();
-}
-
-class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
-  int _selectedIndex = 0;
-  bool isSelected = false;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      isSelected = true;
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.white,
-      selectedItemColor: AppColors.kBorderFocusColor,
-      unselectedItemColor: Colors.grey,
-      selectedFontSize: 10,
-      unselectedFontSize: 10,
-      onTap: _onItemTapped,
-      currentIndex: _selectedIndex,
-      showSelectedLabels: isSelected,
-      items: [
-        BottomNavigationBarItem(
-          label: 'Home',
-          icon: SelectedBottomBar(
-            isSelected: isSelected,
-            image: AppImages.kHome,
+      bottomNavigationBar: BottomAppBar(
+        notchMargin: 10,
+        elevation: 0,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 15),
+          child: Obx(
+            () => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _bottomAppBarItem(context,
+                    img: AppImages.kHome, label: 'Home', page: 0),
+                _bottomAppBarItem(context,
+                    img: AppImages.kMessage, label: 'Messages', page: 1),
+                _bottomAppBarItem(context,
+                    img: AppImages.kApply, label: 'Applied', page: 2),
+                _bottomAppBarItem(context,
+                    img: AppImages.kArchive, label: 'Saved', page: 3),
+                _bottomAppBarItem(context,
+                    img: AppImages.kProfile, label: 'Profile', page: 4),
+              ],
+            ),
           ),
         ),
-        BottomNavigationBarItem(
-          label: 'Messages',
-          icon: SelectedBottomBar(
-            isSelected: isSelected,
-            image: AppImages.kMessage,
-          ),
-        ),
-        BottomNavigationBarItem(
-          label: 'Applied',
-          icon: SelectedBottomBar(
-            isSelected: isSelected,
-            image: AppImages.kApply,
-          ),
-        ),
-        BottomNavigationBarItem(
-          label: 'Saved',
-          icon: SelectedBottomBar(
-            isSelected: isSelected,
-            image: AppImages.kArchive,
-          ),
-        ),
-        BottomNavigationBarItem(
-          label: 'Profile',
-          icon: SelectedBottomBar(
-            isSelected: isSelected,
-            image: AppImages.kProfile,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class SelectedBottomBar extends StatelessWidget {
-  const SelectedBottomBar({
-    super.key,
-    required this.isSelected,
-    required this.image,
-  });
-
-  final bool isSelected;
-  final String image;
-
-  @override
-  Widget build(BuildContext context) {
-    return ColorFiltered(
-      colorFilter: ColorFilter.mode(
-        isSelected ? AppColors.kBorderFocusColor : Colors.grey,
-        BlendMode.modulate,
       ),
-      child: Image.asset(image),
+    );
+  }
+
+  Widget _bottomAppBarItem(BuildContext context,
+      {required img, required page, required label}) {
+    return ZoomTapAnimation(
+      onTap: () => controller.goToTab(page),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            img,
+            color: controller.currentPage.value == page
+                ? const Color(0xff3366FF)
+                : const Color(0xff9CA3AF),
+          ),
+          const SizedBox(height: 5),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 10,
+              color: controller.currentPage.value == page
+                  ? const Color(0xff3366FF)
+                  : const Color(0xff9CA3AF),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

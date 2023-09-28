@@ -41,4 +41,17 @@ abstract class AppImages {
   static const kArchive = 'assets/images/archive.png';
   static const kProfileUser = 'assets/images/dimas_profile.png';
   static const kHome = 'assets/images/home.png';
+  static const kGlobalIcon = 'assets/images/global.png';
+  static const kPortfolio = 'assets/images/folder-favorite.png';
+  static const kCamera = 'assets/images/camera.png';
+  static const kEngland = 'assets/images/England.png';
+  static const kFrance = 'assets/images/France.png';
+  static const kGermany = 'assets/images/Germany.png';
+  static const kJapan = 'assets/images/Japan.png';
+  static const kNetherlands = 'assets/images/Netherlands.png';
+  static const kPortugal = 'assets/images/Portugal.png';
+  static const kSouthKorea = 'assets/images/South_Korea.png';
+  static const kSaudiArabia = 'assets/images/Saudi_Arabia.png';
+  static const kIndonesia = 'assets/images/Indonesia-1.png';
+  static const kChina = 'assets/images/China-1.png';
 }

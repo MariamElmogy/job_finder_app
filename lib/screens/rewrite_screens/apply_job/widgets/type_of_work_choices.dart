@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/utils/app_colors.dart';
 
-import '../../../utils/app_fonts.dart';
+import '../../../../utils/app_fonts.dart';
 import 'custom_radio_button.dart';
 
 class TypeOfWorkChoices extends StatefulWidget {
   const TypeOfWorkChoices({
     super.key,
+    required this.onWorkTypeSelected,
   });
+  final Function(String)
+      onWorkTypeSelected; // Callback function to notify the parent widget
 
   @override
   State<TypeOfWorkChoices> createState() => _TypeOfWorkChoicesState();
@@ -37,8 +40,7 @@ class _TypeOfWorkChoicesState extends State<TypeOfWorkChoices> {
                   ? AppColors.kBorderFocusColor
                   : AppColors.kBoarderColor),
         ),
-        child: ListView.builder(itemBuilder: (context, index) {
-          return ListTile(
+        child: ListTile(
             title: Text(
               works[0],
               style: const TextStyle(
@@ -61,13 +63,14 @@ class _TypeOfWorkChoicesState extends State<TypeOfWorkChoices> {
                 isSelected = !isSelected;
                 if (isSelected) {
                   selectedWorkType = works[0]; // Set the selected work type
+                  widget.onWorkTypeSelected(selectedWorkType);
                 } else {
                   selectedWorkType = ''; // Deselect the work type
                 }
               });
             },
-          );
-        }),
+          ),
+        
       ),
     );
     // return GestureDetector(

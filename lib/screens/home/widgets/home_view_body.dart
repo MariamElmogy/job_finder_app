@@ -10,36 +10,39 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: CustomHomeAppBar(),
-        ),
-        SliverToBoxAdapter(
-          child: CustomSearchBar(),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 20.0),
-            child: CustomHeadlineWidget(title: 'Suggested Job'),
+    return const Padding(
+      padding: EdgeInsets.all(16.0),
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: CustomHomeAppBar(),
           ),
-        ),
-        SliverToBoxAdapter(
-          child: SuggestJobViewFutureBuilder(),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.0),
-            child: CustomHeadlineWidget(title: 'Recent Job'),
+          SliverToBoxAdapter(
+            child: CustomSearchBar(),
           ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: RecentJobViewFutureBuilder(),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.0),
+              child: CustomHeadlineWidget(title: 'Suggested Job'),
+            ),
           ),
-        ),
-      ],
+          SliverToBoxAdapter(
+            child: SuggestJobViewFutureBuilder(),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 16.0),
+              child: CustomHeadlineWidget(title: 'Recent Job'),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: RecentJobViewFutureBuilder(),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

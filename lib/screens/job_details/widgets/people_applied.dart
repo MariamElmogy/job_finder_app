@@ -55,13 +55,21 @@ class _PeopleAppliedState extends State<PeopleApplied> {
           ),
         ),
         const SizedBox(height: 20),
-        const EmployeesData(),
-        const EmployeesData(),
-        const EmployeesData(),
-        const EmployeesData(),
-        const EmployeesData(),
-        const EmployeesData(),
-        const EmployeesData(),
+        Expanded(
+          child: Container(
+            child: ListView.separated(
+              itemCount: 8,
+              itemBuilder: (context, index) {
+                return const EmployeesData();
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return const Divider(
+                  thickness: 1,
+                );
+              },
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -75,7 +83,7 @@ class EmployeesData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

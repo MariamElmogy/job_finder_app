@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-import '../../../utils/app_colors.dart';
-import '../../../utils/app_fonts.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_fonts.dart';
 
 class ApplyFormHeadline extends StatelessWidget {
   const ApplyFormHeadline(

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/models/jobs_model.dart';
-import '../widgets/company_detail.dart';
-import '../widgets/job_description.dart';
+import 'package:job_finder_app/screens/job_details/widgets/people_applied.dart';
 import '../widgets/job_detail.dart';
 import '../widgets/job_information.dart';
-import '../widgets/people_applied.dart';
+import 'company_detail.dart';
+import 'job_description.dart';
 
 class JobDetailsViewBody extends StatefulWidget {
   const JobDetailsViewBody({super.key, required this.job});
@@ -38,7 +38,13 @@ class _JobDetailsViewBodyState extends State<JobDetailsViewBody> {
             },
           ),
         ),
-        SliverToBoxAdapter(
+        SliverFillRemaining(
+          // child: Container(
+          //   child: ListView.builder(
+          //     itemBuilder: (context, index) {
+          //       return Text(index.toString());
+          //     },
+          //   ),
           child: counter == 0
               ? JobDescription(
                   job: widget.job,
@@ -52,6 +58,19 @@ class _JobDetailsViewBodyState extends State<JobDetailsViewBody> {
                       child: PeopleApplied(jobsModel: widget.job),
                     ),
         ),
+        // child: counter == 0
+        //     ? JobDescription(
+        //         job: widget.job,
+        //       )
+        //     : counter == 1
+        //         ? CompanyDetail(
+        //             job: widget.job,
+        //           )
+        //         : Padding(
+        //             padding: const EdgeInsets.all(8.0),
+        //             child: PeopleApplied(jobsModel: widget.job),
+        //           ),
+        // ),
       ],
     );
   }

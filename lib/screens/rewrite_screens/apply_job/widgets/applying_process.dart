@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:job_finder_app/screens/apply_job/widgets/stap_circle.dart';
+import 'package:job_finder_app/screens/rewrite_screens/apply_job/widgets/stap_circle.dart';
 
 import 'custom_dots.dart';
 

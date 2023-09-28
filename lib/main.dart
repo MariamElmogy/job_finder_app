@@ -36,7 +36,7 @@ class JobFinderApp extends StatelessWidget {
         RegisterView.id: (context) => const RegisterView(),
         LoginView.id: (context) => const LoginView(),
         WorkSuggestionsView.id: (context) => const WorkSuggestionsView(),
-        HomeView.id: (context) => const HomeView(),
+        HomeView.id: (context) =>  HomeView(),
       },
       initialRoute: SplashView.id,
     );

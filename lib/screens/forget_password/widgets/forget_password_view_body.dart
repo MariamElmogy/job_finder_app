@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:job_finder_app/custom_widgets/custom_button.dart';
 import 'package:job_finder_app/custom_widgets/custom_success_processes.dart';
 import 'package:job_finder_app/custom_widgets/custom_textfield.dart';
+import 'package:job_finder_app/screens/forget_password/widgets/reset_password_view.dart';
 import 'package:job_finder_app/screens/login/views/login_view.dart';
 import 'package:job_finder_app/services/user_api_service.dart';
 import 'package:job_finder_app/utils/app_colors.dart';
@@ -106,12 +107,19 @@ class _ForgetPasswordViewBodyState extends State<ForgetPasswordViewBody> {
 
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
-                  return const CustomSuccessProcesses(
+                  return CustomSuccessProcesses(
                     image: AppImages.kEmailIlustration,
                     title: 'Check your Email',
                     subtitle:
                         'We have sent a reset password to your email address',
                     buttonText: 'Open email app',
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return const ResetPasswordView();
+                        },
+                      ));
+                    },
                   );
                 },
               ));

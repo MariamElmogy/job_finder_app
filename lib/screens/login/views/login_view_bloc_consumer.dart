@@ -17,7 +17,7 @@ class LoginViewBlocConsumer extends StatelessWidget {
               .showSnackBar(const SnackBar(content: Text('Success')));
           Navigator.push(context, MaterialPageRoute(
             builder: (context) {
-              return const HomeView();
+              return  HomeView();
             },
           ));
         }

@@ -5,6 +5,7 @@ import 'package:job_finder_app/screens/on_boarding/views/on_boarding_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/constants.dart';
+import '../../home/views/home_view.dart';
 import '../widget/splash_view_body.dart';
 
 class SplashView extends StatefulWidget {
@@ -38,16 +39,11 @@ class _SplashViewState extends State<SplashView> {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) {
-            return const OnBoardingView();
-          },
-        ));
-        // Navigator.pushReplacement(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (BuildContext ctx) =>
-        //             email == null ? const OnBoardingView() : const HomeView()));
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext ctx) =>
+                    email == null ? const OnBoardingView() :  HomeView()));
       },
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:job_finder_app/custom_widgets/custom_button.dart';
 import 'package:job_finder_app/custom_widgets/custom_success_processes.dart';
 import 'package:job_finder_app/custom_widgets/custom_textfield.dart';
+import 'package:job_finder_app/screens/home/views/home_view.dart';
 import 'package:job_finder_app/services/user_api_service.dart';
 import 'package:job_finder_app/utils/app_colors.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
@@ -112,12 +113,19 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                 UserApiService.updatePassword(password: password.trim());
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return const CustomSuccessProcesses(
+                    return CustomSuccessProcesses(
                       buttonText: 'Open email app',
                       image: AppImages.kPasswordSuccesfullyIlustration,
                       subtitle:
                           'Your password has been changed successfully, we will let you know if there are more problems with your account',
                       title: 'Password changed succesfully!',
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return  HomeView();
+                          },
+                        ));
+                      },
                     );
                   },
                 ));

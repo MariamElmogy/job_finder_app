@@ -67,7 +67,8 @@ class JobApiService {
     }
   }
 
-  static Future<void> applyJob(ApplyJobsModel jobs) async {
+  static Future<void> applyJob(
+      ApplyJobsModel jobs, Map<String, String?> data) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     try {
       HttpClient httpClient = HttpClient();
@@ -77,8 +78,8 @@ class JobApiService {
       const url = '$baseUrl/apply';
       log('name  = ${jobs.name.toString()}');
       log('email  = ${jobs.email.toString()}');
-      log('cv_file  = ${jobs.cv_file.toString()}');
       log('mobile  = ${jobs.mobile.toString()}');
+      log('cv_file  = ${jobs.cv_file.toString()}');
       log('work_type  = ${jobs.work_type.toString()}');
       log('other_file  = ${jobs.other_file.toString()}');
       log('user_id  = ${jobs.user_id.toString()}');
@@ -86,16 +87,17 @@ class JobApiService {
 
       final response = await client.post(
         Uri.parse(url),
-        body: {
-          'cv_file': 'jobs.cv_file',
-          'name': jobs.name,
-          'email': jobs.email,
-          'mobile': jobs.mobile,
-          'work_type': jobs.work_type,
-          'other_file': 'jobs.other_file',
-          'user_id': preferences.getInt(kUserId).toString(),
-          'jobs_id': preferences.getInt(kJobId).toString(),
-        },
+        // body: {
+        //   // 'cv_file': 'jobs.cv_file',
+        //   'name': jobs.name,
+        //   'email': jobs.email,
+        //   'mobile': jobs.mobile,
+        //   // 'work_type': jobs.work_type,
+        //   // 'other_file': 'jobs.other_file',
+        //   // 'user_id': preferences.getInt(kUserId).toString(),
+        //   // 'jobs_id': preferences.getInt(kJobId).toString(),
+        // },
+        body: data,
       );
       if (response.statusCode == 200) {
         log(response.statusCode.toString());

@@ -28,6 +28,7 @@ Future<UserModel> fetchUserData() async {
     // If the server did return a 200 OK response,
     // then parse the JSON.
     log(jsonEncode(jsonDecode(response.body)['data']));
+    log(preferences.getString(kUserToken).toString());
     return UserModel.fromJson(jsonDecode(response.body)['data']);
   } else {
     // If the server did not return a 200 OK response,

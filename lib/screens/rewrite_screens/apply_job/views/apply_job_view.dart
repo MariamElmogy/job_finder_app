@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/app_fonts.dart';
+import '../../../../utils/app_fonts.dart';
 import '../widgets/apply_view_body.dart';
 
 class ApplyJobView extends StatefulWidget {
