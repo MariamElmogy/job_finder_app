@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:job_finder_app/screens/profile/login_and_security/views/phone_number_view.dart';
+import 'package:job_finder_app/screens/profile/login_and_security/views/two_step_verification_view.dart';
 
-import '../../../utils/app_fonts.dart';
+import '../../../../utils/app_fonts.dart';
+import 'change_password_view.dart';
+import 'email_address_view.dart';
+import 'face_id_view.dart';
 
 class LoginAndSecurityView extends StatefulWidget {
   const LoginAndSecurityView({super.key});
@@ -16,6 +21,13 @@ class _LoginAndSecurityViewState extends State<LoginAndSecurityView> {
     'Change password',
     'Two-step verification',
     'Face ID',
+  ];
+  List<dynamic> screen = [
+    const EmailAddressView(),
+    const PhoneNumberView(),
+    const ChangePasswordView(),
+    const TwoStepVerificationView(),
+    const FaceIDView(),
   ];
 
   @override
@@ -56,6 +68,14 @@ class _LoginAndSecurityViewState extends State<LoginAndSecurityView> {
               itemCount: title.length,
               itemBuilder: (context, index) {
                 return ListTile(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return screen[index];
+                      },
+                    ),
+                  ),
                   trailing: const Icon(Icons.arrow_forward),
                   title: Text(
                     title[index],

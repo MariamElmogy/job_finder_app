@@ -6,7 +6,7 @@ import 'package:job_finder_app/utils/app_images.dart';
 
 import '../../edit_profile/views/edit_profile_view.dart';
 import '../languages/views/language_view.dart';
-import 'login_and_security_view.dart';
+import '../login_and_security/views/login_and_security_view.dart';
 import '../notification/views/notification_view.dart';
 
 class GeneralListView extends StatefulWidget {
@@ -39,13 +39,12 @@ class _GeneralListViewState extends State<GeneralListView> {
     const PortfolioView(),
     const LanguageView(),
     const NotificationView(),
-     LoginAndSecurityView()
+    const LoginAndSecurityView()
   ];
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // height: MediaQuery.of(context).size.height,
       child: ListView.separated(
         itemCount: general.length,
         shrinkWrap: true, // Set shrinkWrap to true

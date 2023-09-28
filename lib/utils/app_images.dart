@@ -54,4 +54,8 @@ abstract class AppImages {
   static const kSaudiArabia = 'assets/images/Saudi_Arabia.png';
   static const kIndonesia = 'assets/images/Indonesia-1.png';
   static const kChina = 'assets/images/China-1.png';
+  static const kExternalDrive = 'assets/images/external-drive.png';
+  static const kLock = 'assets/images/lock_1.png';
+  static const kDocument = 'assets/images/document-upload.png';
+  static const kPDF = 'assets/images/pdf.png';
 }
