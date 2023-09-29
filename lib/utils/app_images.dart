@@ -58,4 +58,9 @@ abstract class AppImages {
   static const kLock = 'assets/images/lock_1.png';
   static const kDocument = 'assets/images/document-upload.png';
   static const kPDF = 'assets/images/pdf.png';
+  static const kClock = 'assets/images/clock.png';
+  static const kMore = 'assets/images/more.png';
+  static const kSavedIlustration = 'assets/images/Saved_Ilustration.png';
+
+  
 }

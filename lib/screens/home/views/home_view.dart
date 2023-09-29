@@ -5,6 +5,9 @@ import 'package:job_finder_app/screens/profile/views/profile_view.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import '../../../utils/app_images.dart';
+import '../../applied/views/applied_view.dart';
+import '../../message/views/message_view.dart';
+import '../../saved/views/saved_view.dart';
 import '../widgets/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
@@ -21,6 +24,9 @@ class HomeView extends StatelessWidget {
           controller: controller.pageController,
           children: const [
             HomeViewBody(),
+            MessageView(),
+            AppliedView(),
+            SavedView(),
             ProfileView(),
           ],
         ),

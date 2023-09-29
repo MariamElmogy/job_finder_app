@@ -3,7 +3,7 @@ import 'package:job_finder_app/custom_widgets/custom_button.dart';
 import 'package:job_finder_app/screens/rewrite_screens/apply_job/widgets/phone_text_field.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 
-import '../../../utils/app_colors.dart';
+import '../../../../utils/app_colors.dart';
 import 'edit_profile_form_item.dart';
 
 class EditProfileForm extends StatefulWidget {

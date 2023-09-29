@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/app_colors.dart';
-import '../../../utils/app_fonts.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_fonts.dart';
 
 class EditProfileFormItem extends StatelessWidget {
   const EditProfileFormItem({
