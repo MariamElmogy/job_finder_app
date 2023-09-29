@@ -18,6 +18,7 @@ class SavedView extends StatelessWidget {
           ),
         ),
         centerTitle: true,
+        
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: const SafeArea(

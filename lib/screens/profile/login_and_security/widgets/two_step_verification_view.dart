@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/custom_widgets/custom_button.dart';
-import 'package:job_finder_app/screens/profile/login_and_security/views/two_step_verification_view_two.dart';
+import 'package:job_finder_app/screens/profile/login_and_security/widgets/two_step_verification_view_two.dart';
 import 'package:job_finder_app/screens/profile/notification/views/notification_view.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 import 'package:job_finder_app/utils/app_images.dart';

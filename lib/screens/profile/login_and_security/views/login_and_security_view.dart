@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/screens/profile/login_and_security/views/phone_number_view.dart';
-import 'package:job_finder_app/screens/profile/login_and_security/views/two_step_verification_view.dart';
-
 import '../../../../utils/app_fonts.dart';
-import 'change_password_view.dart';
-import 'email_address_view.dart';
-import 'face_id_view.dart';
+import '../widgets/change_password_view.dart';
+import '../widgets/email_address_view.dart';
+import '../widgets/face_id_view.dart';
+import '../widgets/phone_number_view.dart';
+import '../widgets/two_step_verification_view.dart';
 
 class LoginAndSecurityView extends StatefulWidget {
   const LoginAndSecurityView({super.key});
