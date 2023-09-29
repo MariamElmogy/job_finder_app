@@ -7,8 +7,7 @@ import 'package:job_finder_app/utils/app_images.dart';
 import '../edit_profile/views/edit_profile_view.dart';
 import '../languages/views/language_view.dart';
 import '../login_and_security/views/login_and_security_view.dart';
-import '../notification/views/notification_view.dart';
-
+import '../notification_settings/views/notification_settings_view.dart';
 class GeneralListView extends StatefulWidget {
   const GeneralListView({
     super.key,
@@ -38,7 +37,7 @@ class _GeneralListViewState extends State<GeneralListView> {
     const EditProfileView(),
     const PortfolioView(),
     const LanguageView(),
-    const NotificationView(),
+    const NotificationSettingsView(),
     const LoginAndSecurityView()
   ];
 

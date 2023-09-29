@@ -14,41 +14,7 @@ class SavedJobViewFutureBuilder extends StatelessWidget {
       future: FavoritesApiService.fetchAllFavoritesJobs(),
       builder: (context, snapshot) {
         if ((snapshot.data?.isEmpty ?? true)) {
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(AppImages.kSavedIlustration),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  'Nothing has been saved yet',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontFamily: AppFonts.kRegisterHeadlineFont,
-                      color: Color(0xff111827)),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                    'Press the star icon on the job you want to save.',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Color(0xff6B7280),
-                      fontFamily: AppFonts.kRegisterHintFont,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-          );
+          return const SingleChildScrollView(child: NoSavedJobs());
         }
         if (!snapshot.hasError) {
           if (snapshot.connectionState == ConnectionState.done) {
@@ -84,6 +50,51 @@ class SavedJobViewFutureBuilder extends StatelessWidget {
           );
         }
       },
+    );
+  }
+}
+
+class NoSavedJobs extends StatelessWidget {
+  const NoSavedJobs({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Image.asset(AppImages.kSavedIlustration),
+            const SizedBox(
+              height: 20,
+            ),
+            const Text(
+              'Nothing has been saved yet',
+              style: TextStyle(
+                  fontSize: 24,
+                  fontFamily: AppFonts.kRegisterHeadlineFont,
+                  color: Color(0xff111827)),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                'Press the star icon on the job you want to save.',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Color(0xff6B7280),
+                  fontFamily: AppFonts.kRegisterHintFont,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

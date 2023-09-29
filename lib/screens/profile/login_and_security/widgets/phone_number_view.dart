@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/screens/profile/notification/views/notification_view.dart';
 import 'package:job_finder_app/screens/rewrite_screens/apply_job/widgets/phone_text_field.dart';
 
 import '../../../../custom_widgets/custom_button.dart';
+import '../../../../custom_widgets/custom_switch.dart';
 import '../../../../utils/app_fonts.dart';
 
 class PhoneNumberView extends StatelessWidget {

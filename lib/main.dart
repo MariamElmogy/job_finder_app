@@ -4,6 +4,7 @@ import 'package:job_finder_app/screens/login/views/login_view.dart';
 import 'package:job_finder_app/screens/register/views/register_view.dart';
 import 'package:job_finder_app/screens/work_suggestions/views/work_suggestions_view.dart';
 import 'package:job_finder_app/utils/app_colors.dart';
+import 'package:provider/provider.dart';
 
 import 'screens/on_boarding/views/on_boarding_view.dart';
 import 'screens/splash/views/splash_view.dart';
@@ -23,22 +24,36 @@ class JobFinderApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Job Finder',
-      theme: ThemeData(
-        scaffoldBackgroundColor: AppColors.kPrimaryColor,
+    return ChangeNotifierProvider(
+      create: (context) => SavedJobProvider(),
+      child: MaterialApp(
+        title: 'Job Finder',
+        theme: ThemeData(
+          scaffoldBackgroundColor: AppColors.kPrimaryColor,
+        ),
+        debugShowCheckedModeBanner: false,
+        // builder: DevicePreview.appBuilder,
+        routes: {
+          SplashView.id: (context) => const SplashView(),
+          OnBoardingView.id: (context) => const OnBoardingView(),
+          RegisterView.id: (context) => const RegisterView(),
+          LoginView.id: (context) => const LoginView(),
+          WorkSuggestionsView.id: (context) => const WorkSuggestionsView(),
+          HomeView.id: (context) =>  HomeView(),
+        },
+        initialRoute: SplashView.id,
       ),
-      debugShowCheckedModeBanner: false,
-      // builder: DevicePreview.appBuilder,
-      routes: {
-        SplashView.id: (context) => const SplashView(),
-        OnBoardingView.id: (context) => const OnBoardingView(),
-        RegisterView.id: (context) => const RegisterView(),
-        LoginView.id: (context) => const LoginView(),
-        WorkSuggestionsView.id: (context) => const WorkSuggestionsView(),
-        HomeView.id: (context) =>  HomeView(),
-      },
-      initialRoute: SplashView.id,
     );
+  }
+}
+
+class SavedJobProvider extends ChangeNotifier {
+  bool _isSaved = false;
+
+  bool get isSaved => _isSaved;
+
+  void toggleSaved() {
+    _isSaved = !_isSaved;
+    notifyListeners();
   }
 }

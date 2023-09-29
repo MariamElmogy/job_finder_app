@@ -24,6 +24,7 @@ class SavedView extends StatelessWidget {
       body: const SafeArea(
         child: SavedViewBody(),
       ),
+      
     );
   }
 }

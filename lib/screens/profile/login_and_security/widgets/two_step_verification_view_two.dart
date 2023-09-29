@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/custom_widgets/custom_button.dart';
 import 'package:job_finder_app/screens/profile/login_and_security/widgets/two_step_verification_view_three.dart';
-import 'package:job_finder_app/screens/profile/notification/views/notification_view.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
+
+import '../../../../custom_widgets/custom_switch.dart';
 
 class TwoStepVerificationViewTwo extends StatelessWidget {
   const TwoStepVerificationViewTwo({super.key});

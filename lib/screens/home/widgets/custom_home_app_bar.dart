@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/models/user_model.dart';
+import 'package:job_finder_app/screens/profile/notification_settings/views/notification_settings_view.dart';
+import 'package:job_finder_app/services/user_api_service.dart';
 import 'package:job_finder_app/utils/app_colors.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 import 'package:job_finder_app/utils/app_images.dart';
 
-import '../../../services/fetch_user_data.dart';
+import '../../notification/views/notification_view.dart';
 
 class CustomHomeAppBar extends StatelessWidget {
   const CustomHomeAppBar({super.key});
@@ -12,7 +14,7 @@ class CustomHomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<UserModel>(
-      future: fetchUserData(),
+      future: UserApiService.fetchUserData(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Row(
@@ -42,18 +44,28 @@ class CustomHomeAppBar extends StatelessWidget {
                   ],
                 ),
               ),
-              CircleAvatar(
-                backgroundColor: const Color(0xffD1D5DB),
-                radius: 27,
+              GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return  NotificationView();
+                    },
+                  ),
+                ),
                 child: CircleAvatar(
-                  backgroundColor: const Color(0xffFAFAFA),
-                  radius: 26,
-                  child: ColorFiltered(
-                    colorFilter: const ColorFilter.mode(
-                      (Color(0xff292D32)),
-                      BlendMode.modulate,
+                  backgroundColor: const Color(0xffD1D5DB),
+                  radius: 27,
+                  child: CircleAvatar(
+                    backgroundColor: const Color(0xffFAFAFA),
+                    radius: 26,
+                    child: ColorFiltered(
+                      colorFilter: const ColorFilter.mode(
+                        (Color(0xff292D32)),
+                        BlendMode.modulate,
+                      ),
+                      child: Image.asset(AppImages.kNotificationIcon),
                     ),
-                    child: Image.asset(AppImages.kNotificationIcon),
                   ),
                 ),
               ),
