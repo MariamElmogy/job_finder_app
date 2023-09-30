@@ -3,7 +3,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 
-import '../../../../utils/app_colors.dart';
+import '../../../utils/app_colors.dart';
 
 class PhoneTextField extends StatelessWidget {
   const PhoneTextField({

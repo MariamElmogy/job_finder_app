@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../utils/app_fonts.dart';
-import '../widgets/apply_view_body.dart';
+import '../../../utils/app_fonts.dart';
+import '../widgets/apply_job_biodata.dart';
 
 class ApplyJobView extends StatefulWidget {
   const ApplyJobView({super.key});
@@ -29,11 +29,9 @@ class _ApplyJobViewState extends State<ApplyJobView> {
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: ApplyJobViewBody(),
-        ),
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
+        child: ApplyJobBiodata(),
       ),
     );
   }

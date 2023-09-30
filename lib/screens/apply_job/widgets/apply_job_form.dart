@@ -1,26 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/models/apply_job_model.dart';
-import 'package:job_finder_app/screens/rewrite_screens/apply_job/widgets/phone_text_field.dart';
+import 'package:job_finder_app/screens/apply_job/widgets/phone_text_field.dart';
 
-import '../../../../custom_widgets/custom_button.dart';
-import '../../../../custom_widgets/custom_textfield.dart';
-import '../../../../services/job_api_service.dart';
-import '../../../../utils/app_images.dart';
+import '../../../custom_widgets/custom_button.dart';
+import '../../../custom_widgets/custom_textfield.dart';
+import '../../../utils/app_images.dart';
 import 'apply_form_title.dart';
+import 'apply_job_type_of_work.dart';
 
 class ApplyJobForm extends StatefulWidget {
   const ApplyJobForm({
     super.key,
-    required this.currentStep,
-    required this.totalSteps,
-    required this.onNextStep,
-    required this.stepCompletionStatus,
   });
-
-  final int currentStep;
-  final int totalSteps;
-  final VoidCallback onNextStep; // Define the callback function type
-  final List<bool> stepCompletionStatus;
 
   @override
   State<ApplyJobForm> createState() => _ApplyJobFormState();
@@ -30,8 +20,10 @@ class _ApplyJobFormState extends State<ApplyJobForm> {
 //
   final _formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  ApplyJobsModel applyJobs = ApplyJobsModel();
-
+  // ApplyJobsModel applyJobs = ApplyJobsModel();
+  String name = '';
+  String email = '';
+  String phone = '';
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -46,7 +38,7 @@ class _ApplyJobFormState extends State<ApplyJobForm> {
             image: AppImages.kProfile,
             isPasswordCorrect: true,
             onSaved: (value) {
-              applyJobs.name = value!.trim();
+              name = value!.trim();
             },
           ),
 
@@ -57,7 +49,7 @@ class _ApplyJobFormState extends State<ApplyJobForm> {
             image: AppImages.kEmail,
             isPasswordCorrect: true,
             onSaved: (value) {
-              applyJobs.email = value!.trim();
+              email = value!.trim();
             },
           ),
 
@@ -68,7 +60,7 @@ class _ApplyJobFormState extends State<ApplyJobForm> {
           PhoneTextField(
             autovalidateMode: autovalidateMode,
             onSaved: (value) {
-              applyJobs.mobile = value!.number.toString().trim();
+              phone = value!.number.toString().trim();
             },
           ),
           CustomButton(
@@ -76,21 +68,23 @@ class _ApplyJobFormState extends State<ApplyJobForm> {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState?.save();
                   try {
-                    JobApiService.applyJob(applyJobs, {
-                      'name': applyJobs.name,
-                      'email': applyJobs.email,
-                      'mobile': applyJobs.mobile,
-                    });
-                    widget.stepCompletionStatus[widget.currentStep - 1] = true;
+                    // JobApiService.applyJob(applyJobs, {
+                    //   'name': applyJobs.name,
+                    //   'email': applyJobs.email,
+                    //   'mobile': applyJobs.mobile,
+                    // });
 
-                    if (widget.currentStep < widget.totalSteps) {
-                      setState(() {
-                        widget.onNextStep();
-                      });
-                    }
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return ApplyJobTypeOfWork(
+                          email: email,
+                          name: name,
+                          phone: phone,
+                        );
+                      },
+                    ));
                   } catch (error) {
                     print('API request failed: $error');
-                    widget.stepCompletionStatus[widget.currentStep - 1] = false;
                   }
                 } else {
                   setState(() {
@@ -98,7 +92,7 @@ class _ApplyJobFormState extends State<ApplyJobForm> {
                   });
                 }
               },
-              text: widget.currentStep < widget.totalSteps ? 'Next' : 'Submit'),
+              text: 'Next'),
         ],
       ),
     );

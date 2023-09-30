@@ -57,7 +57,7 @@ class JobApiService {
       // If the server did return a 200 OK response,
       // then parse the JSON.
       // log(jsonEncode(jsonDecode(response.body)['data']));
-      preferences.setInt(kJobId, data['id']);
+      // preferences.setInt(kJobId, data['id']);
       // log(' job Id : ${preferences.getInt(kJobId)}');
       return JobsModel.fromJson(data);
     } else {
@@ -67,44 +67,64 @@ class JobApiService {
     }
   }
 
-  static Future<void> applyJob(
-      ApplyJobsModel jobs, Map<String, String?> data) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    try {
-      HttpClient httpClient = HttpClient();
-      httpClient.badCertificateCallback =
-          ((X509Certificate cert, String host, int port) => true);
-      http.Client client = IOClient(httpClient);
-      const url = '$baseUrl/apply';
-      log('name  = ${jobs.name.toString()}');
-      log('email  = ${jobs.email.toString()}');
-      log('mobile  = ${jobs.mobile.toString()}');
-      log('cv_file  = ${jobs.cv_file.toString()}');
-      log('work_type  = ${jobs.work_type.toString()}');
-      log('other_file  = ${jobs.other_file.toString()}');
-      log('user_id  = ${jobs.user_id.toString()}');
-      log('jobs_id  = ${jobs.jobs_id.toString()}');
+  static Future uploadFiles({
+    required name,
+    required email,
+    required selectedWorkType,
+    required phone,
+    required cvFile,
+    required otherFile,
+  }) async {
+    var dio = Dio();
+    dio.options.followRedirects = true; // Allow following redirects
+    dio.options.maxRedirects = 5; // Maximum number of redirects to follow
 
-      final response = await client.post(
-        Uri.parse(url),
-        // body: {
-        //   // 'cv_file': 'jobs.cv_file',
-        //   'name': jobs.name,
-        //   'email': jobs.email,
-        //   'mobile': jobs.mobile,
-        //   // 'work_type': jobs.work_type,
-        //   // 'other_file': 'jobs.other_file',
-        //   // 'user_id': preferences.getInt(kUserId).toString(),
-        //   // 'jobs_id': preferences.getInt(kJobId).toString(),
-        // },
-        body: data,
-      );
-      if (response.statusCode == 200) {
-        log(response.statusCode.toString());
-        json.decode(response.body);
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    dio.options.headers['Authorization'] =
+        'Bearer ${preferences.getString(kUserToken)}';
+    FormData formData = FormData.fromMap({
+      'cv_file': await MultipartFile.fromFile(cvFile!.path),
+      'other_file': await MultipartFile.fromFile(otherFile!.path),
+      'name': name,
+      'email': email,
+      'work_type': selectedWorkType,
+      'mobile': phone,
+      'jobs_id': 2,
+      'user_id': 27,
+    });
+
+    var response = await dio.post(
+      '$baseUrl/apply',
+      data: formData,
+    );
+    if (response.statusCode == 200) {
+    } else {
+      // Handle the response or error here
+      log('Request failed with status code: ${response.statusCode}');
+      log('Response data: ${response.data}');
+    }
+  }
+
+  static Future<List<ApplyJobsModel>> fetchSuccessfulApplyingJob() async {
+    try {
+      final dio = Dio();
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      dio.options.headers['Authorization'] =
+          'Bearer ${preferences.getString(kUserToken)}';
+      var response = await dio.get('$baseUrl/apply/27');
+
+      List<ApplyJobsModel> jobs = [];
+      var items = response.data['data'];
+      for (var jobMap in items) {
+        try {
+          jobs.add(ApplyJobsModel.fromJson(jobMap));
+        } catch (e) {
+          jobs.add(ApplyJobsModel.fromJson(jobMap));
+        }
       }
+      return jobs;
     } catch (e) {
-      log('error = ${e.toString()}');
+      throw Exception(e.toString());
     }
   }
 }

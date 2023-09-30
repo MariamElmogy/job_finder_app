@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/screens/rewrite_screens/apply_job/widgets/phone_text_field.dart';
+import 'package:job_finder_app/screens/apply_job/widgets/phone_text_field.dart';
 
 import '../../../../custom_widgets/custom_button.dart';
 import '../../../../custom_widgets/custom_switch.dart';

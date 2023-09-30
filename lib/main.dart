@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/screens/home/views/home_view.dart';
+import 'package:job_finder_app/screens/home/widgets/home_view_body.dart';
 import 'package:job_finder_app/screens/login/views/login_view.dart';
 import 'package:job_finder_app/screens/register/views/register_view.dart';
 import 'package:job_finder_app/screens/work_suggestions/views/work_suggestions_view.dart';
@@ -24,8 +25,16 @@ class JobFinderApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => SavedJobProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ApplicationState(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SavedJobProvider(),
+        ),
+        // Add more providers as needed
+      ],
       child: MaterialApp(
         title: 'Job Finder',
         theme: ThemeData(
@@ -39,7 +48,7 @@ class JobFinderApp extends StatelessWidget {
           RegisterView.id: (context) => const RegisterView(),
           LoginView.id: (context) => const LoginView(),
           WorkSuggestionsView.id: (context) => const WorkSuggestionsView(),
-          HomeView.id: (context) =>  HomeView(),
+          HomeView.id: (context) => HomeView(),
         },
         initialRoute: SplashView.id,
       ),

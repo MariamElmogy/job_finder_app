@@ -39,12 +39,7 @@ class _JobDetailsViewBodyState extends State<JobDetailsViewBody> {
           ),
         ),
         SliverFillRemaining(
-          // child: Container(
-          //   child: ListView.builder(
-          //     itemBuilder: (context, index) {
-          //       return Text(index.toString());
-          //     },
-          //   ),
+       
           child: counter == 0
               ? JobDescription(
                   job: widget.job,
@@ -58,19 +53,7 @@ class _JobDetailsViewBodyState extends State<JobDetailsViewBody> {
                       child: PeopleApplied(jobsModel: widget.job),
                     ),
         ),
-        // child: counter == 0
-        //     ? JobDescription(
-        //         job: widget.job,
-        //       )
-        //     : counter == 1
-        //         ? CompanyDetail(
-        //             job: widget.job,
-        //           )
-        //         : Padding(
-        //             padding: const EdgeInsets.all(8.0),
-        //             child: PeopleApplied(jobsModel: widget.job),
-        //           ),
-        // ),
+       
       ],
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/screens/rewrite_screens/apply_job/widgets/custom_radio_button.dart';
+import 'package:job_finder_app/screens/apply_job/widgets/custom_radio_button.dart';
 import 'package:job_finder_app/utils/app_images.dart';
 
 import '../../../../utils/app_fonts.dart';

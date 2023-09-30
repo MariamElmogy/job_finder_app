@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:job_finder_app/custom_widgets/custom_button.dart';
 import 'package:job_finder_app/custom_widgets/custom_textfield.dart';
 import 'package:job_finder_app/screens/profile/login_and_security/widgets/two_step_verification_view_four.dart';
-import 'package:job_finder_app/screens/rewrite_screens/apply_job/widgets/phone_text_field.dart';
+import 'package:job_finder_app/screens/apply_job/widgets/phone_text_field.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 import 'package:job_finder_app/utils/app_images.dart';
 

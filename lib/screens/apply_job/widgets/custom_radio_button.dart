@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../../../utils/app_colors.dart';
+import '../../../utils/app_colors.dart';
 
-class CustomRadioButton extends StatefulWidget {
+class CustomRadioButton extends StatelessWidget {
   const CustomRadioButton({
     super.key,
     required this.isSelected,
   });
   final bool isSelected;
   @override
-  State<CustomRadioButton> createState() => _CustomRadioButtonState();
-}
-
-class _CustomRadioButtonState extends State<CustomRadioButton> {
-  @override
   Widget build(BuildContext context) {
-    return widget.isSelected
+    return isSelected
         ? const CircleAvatar(
             radius: 12,
             backgroundColor: Color(0xff3366FF),

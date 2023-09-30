@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/custom_widgets/custom_button.dart';
 import 'package:job_finder_app/models/jobs_model.dart';
-import 'package:job_finder_app/screens/rewrite_screens/apply_job/views/apply_job_view.dart';
+import 'package:job_finder_app/screens/apply_job/views/apply_job_view.dart';
 import 'package:job_finder_app/screens/job_details/widgets/job_details_view_body.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 import 'package:job_finder_app/utils/app_images.dart';

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/screens/forget_password/widgets/reset_password_view.dart';
 
 import '../../../custom_widgets/custom_button.dart';
 import '../../../utils/app_fonts.dart';
-import '../../../utils/app_images.dart';
 
 class CustomSuccessProcesses extends StatelessWidget {
   const CustomSuccessProcesses(
@@ -11,7 +9,8 @@ class CustomSuccessProcesses extends StatelessWidget {
       required this.title,
       required this.subtitle,
       required this.image,
-      required this.buttonText, this.onPressed});
+      required this.buttonText,
+      this.onPressed});
   final String title;
   final String subtitle;
   final String image;
@@ -32,9 +31,11 @@ class CustomSuccessProcesses extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                  fontSize: 24,
-                  fontFamily: AppFonts.kRegisterHeadlineFont,
-                  color: Color(0xff111827)),
+                fontSize: 24,
+                fontFamily: AppFonts.kRegisterHeadlineFont,
+                color: Color(0xff111827),
+              ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(
               height: 16,
