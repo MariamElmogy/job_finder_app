@@ -67,34 +67,34 @@ class _SavedJobsState extends State<SavedJobs> {
           ),
           trailing: GestureDetector(
             onTap: () {
-              showModalBottomSheet(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                context: context,
-                builder: (context) {
-                  return Padding(
-                    padding: const EdgeInsets.only(
-                        right: 25, left: 25, top: 10, bottom: 20),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Container(
-                            width: 48,
-                            height: 3,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: Colors.black,
+                showModalBottomSheet(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  context: context,
+                  builder: (context) {
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                          right: 25, left: 25, top: 10, bottom: 20),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 48,
+                              height: 3,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 20),
-                          MoreItem(jobToDelete: widget.job),
-                        ],
+                            const SizedBox(height: 20),
+                            MoreItem(jobToDelete: widget.job),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                },
-              );
+                    );
+                  },
+                );
             },
             child: Image.asset(AppImages.kMore),
           ),

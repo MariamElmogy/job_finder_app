@@ -27,6 +27,7 @@ class _JobDetailsViewBodyState extends State<JobDetailsViewBody> {
         ),
         SliverToBoxAdapter(
           child: JobDetail(
+            minWidth: 100.0,
             counter: counter,
             labels: labels,
             onToggle: (index) {

@@ -1,12 +1,12 @@
 import 'dart:io';
 
 class ApplyJobsModel {
-  File? cv_file;
+  String? cv_file;
   String? name;
   String? email;
   String? mobile;
   String? work_type;
-  File? other_file;
+  String? other_file;
   int? user_id;
   int? jobs_id;
 

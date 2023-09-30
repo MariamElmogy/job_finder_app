@@ -69,6 +69,6 @@ abstract class AppImages {
   static const kFacebookLogoLarger = 'assets/images/FacebookLogoLarger.png';
   static const kDataIlustration = 'assets/images/DataIlustration.png';
   static const kCloseCircle = 'assets/images/close-circle.png';
-  static const kEdit = 'assets/images/edit-2.png'; 
-   
+  static const kEdit = 'assets/images/edit-2.png';
+  static const kFilter = 'assets/images/setting-4.png';
 }

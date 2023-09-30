@@ -7,16 +7,29 @@ class SuccessfulApplyingItem extends StatelessWidget {
   final ApplyJobsModel job;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.only(left: 16),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height * .2,
-            child: Text(job.name.toString()),
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.9,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: const Color(0xffD6E4FF),
+      ),
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                job.work_type.toString(),
+              ),
+              const Text(
+                'Waiting to be selected by the twitter team',
+              ),
+            ],
           ),
-        )
-        // ),
-        );
+          Container()
+        ],
+      ),
+    );
   }
 }

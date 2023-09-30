@@ -19,7 +19,9 @@ class SuccessfulApplyingViewFutureBuilder extends StatelessWidget {
               jobs: snapshot.data!,
             );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
         } else {
           return Text(

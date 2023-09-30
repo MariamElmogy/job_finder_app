@@ -14,39 +14,38 @@ class HomeViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final applicationState = Provider.of<ApplicationState>(context);
 
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
+    return const Padding(
+      padding: EdgeInsets.all(16.0),
       child: CustomScrollView(
         slivers: [
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: CustomHomeAppBar(),
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: CustomSearchBar(),
           ),
-          if (applicationState.dataSubmitted)
-            const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                child: SuccessfulApplyingViewFutureBuilder(),
-              ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: SuccessfulApplyingViewFutureBuilder(),
             ),
-          const SliverToBoxAdapter(
+          ),
+          SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 20.0),
               child: CustomHeadlineWidget(title: 'Suggested Job'),
             ),
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: SuggestJobViewFutureBuilder(),
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               child: CustomHeadlineWidget(title: 'Recent Job'),
             ),
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(8.0),
               child: RecentJobViewFutureBuilder(),
@@ -57,8 +56,6 @@ class HomeViewBody extends StatelessWidget {
     );
   }
 }
-
-
 
 class ApplicationState with ChangeNotifier {
   bool _dataSubmitted = false;

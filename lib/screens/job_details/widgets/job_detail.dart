@@ -6,11 +6,12 @@ class JobDetail extends StatefulWidget {
   @override
   State<JobDetail> createState() => _JobDetailState();
   const JobDetail(
-      {super.key, required this.counter, required this.labels, this.onToggle});
+      {super.key, required this.counter, required this.labels, this.onToggle, required this.minWidth});
 
   final int counter;
   final List<String> labels;
   final Function(int?)? onToggle;
+  final double minWidth;
 }
 
 class _JobDetailState extends State<JobDetail> {
@@ -20,7 +21,7 @@ class _JobDetailState extends State<JobDetail> {
       padding: const EdgeInsets.only(bottom: 16.0),
       child: Center(
         child: ToggleSwitch(
-            minWidth: 100.0,
+            minWidth: widget.minWidth,
             cornerRadius: 20.0,
             activeFgColor: Colors.white,
             activeBgColor: const [Color(0xff02337A)],
