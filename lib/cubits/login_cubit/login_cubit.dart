@@ -34,7 +34,7 @@ class LoginCubit extends Cubit<LoginState> {
         // log(data['id']);
         // log('Login successfully');
         preferences.setString(kUserToken, data['token']);
-        preferences.setInt(kUserId, data['user']['id']);
+        // preferences.setInt(kUserId, data['user']['id']);
 
         emit(LoginSuccess());
       } else {

@@ -20,12 +20,14 @@ class ApplyJobUploadPortfolio extends StatefulWidget {
       required this.name,
       required this.email,
       required this.phone,
-      required this.selectedWorkType});
+      required this.selectedWorkType,
+      required this.jobId});
 
   final String name;
   final String email;
   final String phone;
   final String selectedWorkType; // Store the selected work type
+  final int jobId;
 
   @override
   State<ApplyJobUploadPortfolio> createState() =>
@@ -87,13 +89,14 @@ class _ApplyJobUploadPortfolioState extends State<ApplyJobUploadPortfolio> {
                 ),
                 CustomButton(
                   onPressed: () {
-                    JobApiService.uploadFiles(
+                    JobApiService.applyJob(
                       cvFile: cvFile,
                       email: widget.email,
                       name: widget.name,
                       otherFile: otherFile,
                       phone: widget.phone,
                       selectedWorkType: widget.selectedWorkType,
+                      jobId: widget.jobId,
                     );
                     Provider.of<ApplicationState>(context, listen: false)
                         .setDataSubmitted(true);

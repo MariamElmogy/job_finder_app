@@ -13,11 +13,13 @@ class ApplyJobTypeOfWork extends StatefulWidget {
       {super.key,
       required this.name,
       required this.email,
-      required this.phone});
+      required this.phone,
+      required this.jobId});
 
   final String name;
   final String email;
   final String phone;
+  final int jobId;
 
   @override
   State<ApplyJobTypeOfWork> createState() => ApplyJobTypeOfWorkState();
@@ -96,6 +98,7 @@ class ApplyJobTypeOfWorkState extends State<ApplyJobTypeOfWork> {
                               email: widget.email,
                               name: widget.name,
                               phone: widget.phone,
+                              jobId: widget.jobId,
                               selectedWorkType: selectedWorkType,
                             );
                           },

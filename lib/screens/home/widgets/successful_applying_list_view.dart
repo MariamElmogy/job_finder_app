@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:job_finder_app/models/jobs_model.dart';
 import 'package:job_finder_app/screens/home/widgets/successful_applying_item.dart';
-
-import '../../../models/apply_job_model.dart';
 
 class SuccessfulApplyingListView extends StatelessWidget {
   const SuccessfulApplyingListView({super.key, required this.jobs});
-  final List<ApplyJobsModel> jobs;
+  final List<JobsModel> jobs;
 
   @override
   Widget build(BuildContext context) {

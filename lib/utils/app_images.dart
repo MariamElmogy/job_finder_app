@@ -71,4 +71,7 @@ abstract class AppImages {
   static const kCloseCircle = 'assets/images/close-circle.png';
   static const kEdit = 'assets/images/edit-2.png';
   static const kFilter = 'assets/images/setting-4.png';
+  static const kSearchStatus = 'assets/images/search-status.png';
+  static const kArrowRight = 'assets/images/arrow-right.png';
+  static const kSearchIlustration = 'assets/images/SearchIlustration.png';
 }

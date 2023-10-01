@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/screens/home/widgets/custom_search_bar.dart';
+import 'package:job_finder_app/screens/home/widgets/custom_search_bar_view.dart';
 
 import '../widgets/message_view_body.dart';
 

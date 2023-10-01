@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/screens/home/widgets/successful_applying_list_view.dart';
+import 'package:job_finder_app/screens/home/widgets/successful_applying_item.dart';
 
 import '../../../services/job_api_service.dart';
 
@@ -15,8 +15,8 @@ class SuccessfulApplyingViewFutureBuilder extends StatelessWidget {
       builder: (context, snapshot) {
         if (!snapshot.hasError) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return SuccessfulApplyingListView(
-              jobs: snapshot.data!,
+            return SuccessfulApplyingItem(
+              job: snapshot.data!,
             );
           } else {
             return const Center(

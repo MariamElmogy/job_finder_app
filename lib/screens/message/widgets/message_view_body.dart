@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 
 import '../../../utils/app_images.dart';
-import '../../home/widgets/custom_search_bar.dart';
+import '../../home/widgets/custom_search_bar_view.dart';
 import 'custom_filter.dart';
 import 'message_item.dart';
 
@@ -41,7 +41,7 @@ class MessageViewBody extends StatelessWidget {
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.75,
-              child: const CustomSearchBar(),
+              // child: const CustomSearchBar(),
             ),
             const CustomFilter(),
           ],

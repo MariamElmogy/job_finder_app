@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/apply_job_model.dart';
 import '../models/jobs_model.dart';
 import '../utils/constants.dart';
 
@@ -29,12 +28,34 @@ class JobApiService {
         try {
           jobs.add(JobsModel.fromJson(jobMap));
         } catch (e) {
-          jobs.add(JobsModel.fromJson(jobMap));
+          log(e.toString());
         }
       }
+
       return jobs;
     } catch (e) {
       throw Exception(e.toString());
+    }
+  }
+
+  static Future<JobsModel> fetchJobData({required job_id}) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    HttpClient httpClient = HttpClient();
+    httpClient.badCertificateCallback =
+        ((X509Certificate cert, String host, int port) => true);
+    http.Client client = IOClient(httpClient);
+    final response = await client.get(
+      Uri.parse('$baseUrl/jobs/$job_id'),
+      headers: {
+        'Authorization': 'Bearer ${preferences.getString(kUserToken)}',
+      },
+    );
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body)['data'];
+
+      return JobsModel.fromJson(data);
+    } else {
+      throw Exception('Failed to load album');
     }
   }
 
@@ -50,31 +71,23 @@ class JobApiService {
         'Authorization': 'Bearer ${preferences.getString(kUserToken)}',
       },
     );
-    // log(jsonDecode(response.body).toString());
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body)['data'];
 
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      // log(jsonEncode(jsonDecode(response.body)['data']));
-      // preferences.setInt(kJobId, data['id']);
-      // log(' job Id : ${preferences.getInt(kJobId)}');
       return JobsModel.fromJson(data);
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
       throw Exception('Failed to load album');
     }
   }
 
-  static Future uploadFiles({
-    required name,
-    required email,
-    required selectedWorkType,
-    required phone,
-    required cvFile,
-    required otherFile,
-  }) async {
+  static Future applyJob(
+      {required name,
+      required email,
+      required selectedWorkType,
+      required phone,
+      required cvFile,
+      required otherFile,
+      required jobId}) async {
     var dio = Dio();
     dio.options.followRedirects = true; // Allow following redirects
     dio.options.maxRedirects = 5; // Maximum number of redirects to follow
@@ -89,9 +102,11 @@ class JobApiService {
       'email': email,
       'work_type': selectedWorkType,
       'mobile': phone,
-      'jobs_id': 2,
-      'user_id': 27,
+      'jobs_id': jobId,
+      'user_id': preferences.getInt(kUserId),
     });
+
+    preferences.setInt(kJobId, jobId);
 
     var response = await dio.post(
       '$baseUrl/apply',
@@ -105,26 +120,45 @@ class JobApiService {
     }
   }
 
-  static Future<List<ApplyJobsModel>> fetchSuccessfulApplyingJob() async {
-    try {
-      final dio = Dio();
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      dio.options.headers['Authorization'] =
-          'Bearer ${preferences.getString(kUserToken)}';
-      var response = await dio.get('$baseUrl/apply/27');
+  static Future<JobsModel> fetchSuccessfulApplyingJob() async {
+    // try {
+    //   final dio = Dio();
+    //   SharedPreferences preferences = await SharedPreferences.getInstance();
+    //   dio.options.headers['Authorization'] =
+    //       'Bearer ${preferences.getString(kUserToken)}';
+    //   var response =
+    //       await dio.get('$baseUrl/jobs/${preferences.getInt(kJobId)}');
 
-      List<ApplyJobsModel> jobs = [];
-      var items = response.data['data'];
-      for (var jobMap in items) {
-        try {
-          jobs.add(ApplyJobsModel.fromJson(jobMap));
-        } catch (e) {
-          jobs.add(ApplyJobsModel.fromJson(jobMap));
-        }
-      }
-      return jobs;
-    } catch (e) {
-      throw Exception(e.toString());
+    //   List<JobsModel> jobs = [];
+    //   var items = response.data['data'];
+    //   for (var jobMap in items) {
+    //     try {
+    //       jobs.add(JobsModel.fromJson(jobMap));
+    //     } catch (e) {
+    //       jobs.add(JobsModel.fromJson(jobMap));
+    //     }
+    //   }
+    //   return jobs;
+    // } catch (e) {
+    //   throw Exception(e.toString());
+    // }
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    HttpClient httpClient = HttpClient();
+    httpClient.badCertificateCallback =
+        ((X509Certificate cert, String host, int port) => true);
+    http.Client client = IOClient(httpClient);
+    final response = await client.get(
+      Uri.parse('$baseUrl/jobs/${preferences.getInt(kJobId)}'),
+      headers: {
+        'Authorization': 'Bearer ${preferences.getString(kUserToken)}',
+      },
+    );
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body)['data'];
+
+      return JobsModel.fromJson(data);
+    } else {
+      throw Exception('Failed to load album');
     }
   }
 }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:job_finder_app/screens/home/widgets/custom_search_bar_view.dart';
 import 'package:job_finder_app/screens/home/widgets/recent_job_view_future_builder.dart';
 import 'package:job_finder_app/screens/home/widgets/successful_applying_view_future_builder.dart';
 import 'package:job_finder_app/screens/home/widgets/suggest_job_view_futureBuilder.dart';
 import 'package:provider/provider.dart';
+import '../../../utils/app_colors.dart';
+import '../../../utils/app_images.dart';
 import 'custom_headline_widget.dart';
 import 'custom_home_app_bar.dart';
-import 'custom_search_bar.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -14,38 +16,69 @@ class HomeViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final applicationState = Provider.of<ApplicationState>(context);
 
-    return const Padding(
-      padding: EdgeInsets.all(16.0),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
       child: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: CustomHomeAppBar(),
           ),
           SliverToBoxAdapter(
-            child: CustomSearchBar(),
-          ),
-          SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.only(top: 30, bottom: 10),
+              child: GestureDetector(
+                onTap: () => Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return const CustomSearchBarView();
+                  },
+                )),
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    border: Border.all(
+                      color: const Color(0xffD1D5DB),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Image.asset(AppImages.kSearch),
+                      const SizedBox(width: 10),
+                      const Text(
+                        'Search....',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: AppColors.kRegisterHints,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 8),
               child: SuccessfulApplyingViewFutureBuilder(),
             ),
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 20.0),
               child: CustomHeadlineWidget(title: 'Suggested Job'),
             ),
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: SuggestJobViewFutureBuilder(),
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               child: CustomHeadlineWidget(title: 'Recent Job'),
             ),
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(8.0),
               child: RecentJobViewFutureBuilder(),

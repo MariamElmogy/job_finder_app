@@ -4,8 +4,8 @@ import '../../../utils/app_fonts.dart';
 import '../widgets/apply_job_biodata.dart';
 
 class ApplyJobView extends StatefulWidget {
-  const ApplyJobView({super.key});
-
+  const ApplyJobView({super.key, required this.jobId});
+  final int jobId;
   @override
   State<ApplyJobView> createState() => _ApplyJobViewState();
 }
@@ -29,9 +29,9 @@ class _ApplyJobViewState extends State<ApplyJobView> {
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(16.0),
-        child: ApplyJobBiodata(),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ApplyJobBiodata(jobId: widget.jobId),
       ),
     );
   }

@@ -28,6 +28,10 @@ class UserApiService {
       // If the server did return a 200 OK response,
       // then parse the JSON.
       log(jsonEncode(jsonDecode(response.body)['data']));
+
+      log(jsonEncode(jsonDecode(response.body)['data']['id']));
+      preferences.setInt(kUserId, jsonDecode(response.body)['data']['id']);
+
       log(preferences.getString(kUserToken).toString());
       return UserModel.fromJson(jsonDecode(response.body)['data']);
     } else {
