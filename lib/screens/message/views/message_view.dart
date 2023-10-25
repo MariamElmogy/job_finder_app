@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/screens/home/widgets/custom_search_bar_view.dart';
 
 import '../widgets/message_view_body.dart';
 
@@ -14,7 +13,7 @@ class MessageView extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.white,
         title: const Text(
-          'Edit Profile',
+          'Messages',
           style: TextStyle(
             color: Colors.black,
           ),
@@ -23,10 +22,7 @@ class MessageView extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: MessageViewBody(),
-        ),
+        child: MessageViewBody(),
       ),
     );
   }

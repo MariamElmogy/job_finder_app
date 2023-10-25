@@ -22,6 +22,7 @@ class HomeView extends StatelessWidget {
       body: SafeArea(
         child: PageView(
           controller: controller.pageController,
+          physics: const NeverScrollableScrollPhysics(),
           children: const [
             HomeViewBody(),
             MessageView(),
@@ -32,10 +33,10 @@ class HomeView extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        notchMargin: 10,
+        // notchMargin: 10,
         elevation: 0,
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 15),
+          padding: const EdgeInsets.only(right: 35, left: 35, bottom: 5),
           child: Obx(
             () => Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

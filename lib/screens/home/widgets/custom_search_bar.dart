@@ -32,7 +32,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       comp_name: 'UI/UX Designer',
     ),
     JobsModel(
-      comp_name: 'Front-Erd Developer',
+      comp_name: 'Front-End Developer',
     ),
   ];
 

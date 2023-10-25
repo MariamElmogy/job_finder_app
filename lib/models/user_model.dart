@@ -22,7 +22,7 @@ class UserModel {
     return {
       'name': name,
       'email': email,
-      'password': password,
+      // 'password': password,
     };
   }
 }

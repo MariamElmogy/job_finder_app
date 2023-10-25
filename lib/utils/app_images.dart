@@ -6,6 +6,7 @@ abstract class AppImages {
   static const kOnBoarding3 = 'assets/images/On-Boarding-Background-3.png';
   static const kProfile = 'assets/images/profile.png';
   static const kEmail = 'assets/images/sms.png';
+  static const kEmailColored = 'assets/images/sms_colored.png';
   static const kPassword = 'assets/images/lock.png';
   static const kUiUxWork = 'assets/images/uiux.png';
   static const kUdWork = 'assets/images/ud.png';
@@ -68,10 +69,15 @@ abstract class AppImages {
   static const kShoopeLogo = 'assets/images/ShoopeLogo.png';
   static const kFacebookLogoLarger = 'assets/images/FacebookLogoLarger.png';
   static const kDataIlustration = 'assets/images/DataIlustration.png';
+  static const NotificationIlustration =
+      'assets/images/NotificationIlustration.png';
   static const kCloseCircle = 'assets/images/close-circle.png';
   static const kEdit = 'assets/images/edit-2.png';
   static const kFilter = 'assets/images/setting-4.png';
   static const kSearchStatus = 'assets/images/search-status.png';
+  static const kSearchStatusColored = 'assets/images/search-status-colored.png';
   static const kArrowRight = 'assets/images/arrow-right.png';
   static const kSearchIlustration = 'assets/images/SearchIlustration.png';
+  static const kArchiveMinusColor = 'assets/images/archive-minus-colored.png';
+  static const kNoDataIlustration = 'assets/images/NoDataIlustration.png';
 }

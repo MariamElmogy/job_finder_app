@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/custom_widgets/custom_button.dart';
-import 'package:job_finder_app/screens/apply_job/widgets/phone_text_field.dart';
+import 'package:job_finder_app/custom_widgets/phone_text_field.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 
 import '../../../../utils/app_colors.dart';

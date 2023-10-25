@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/screens/home/views/home_view.dart';
 import 'package:job_finder_app/screens/home/widgets/home_view_body.dart';
@@ -7,10 +8,15 @@ import 'package:job_finder_app/screens/work_suggestions/views/work_suggestions_v
 import 'package:job_finder_app/utils/app_colors.dart';
 import 'package:provider/provider.dart';
 
+import 'firebase_options.dart';
 import 'screens/on_boarding/views/on_boarding_view.dart';
 import 'screens/splash/views/splash_view.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     // DevicePreview(
     //   builder: (context) => const JobFinderApp(),
@@ -30,10 +36,7 @@ class JobFinderApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => ApplicationState(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => SavedJobProvider(),
-        ),
-        // Add more providers as needed
+       
       ],
       child: MaterialApp(
         title: 'Job Finder',
@@ -53,16 +56,5 @@ class JobFinderApp extends StatelessWidget {
         initialRoute: SplashView.id,
       ),
     );
-  }
-}
-
-class SavedJobProvider extends ChangeNotifier {
-  bool _isSaved = false;
-
-  bool get isSaved => _isSaved;
-
-  void toggleSaved() {
-    _isSaved = !_isSaved;
-    notifyListeners();
   }
 }

@@ -29,7 +29,7 @@ class _AppliedViewState extends State<AppliedView> {
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: AppliedViewBody(),
+      body: const AppliedViewBody(),
     );
   }
 }

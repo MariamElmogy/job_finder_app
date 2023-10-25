@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:job_finder_app/models/apply_job_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/jobs_model.dart';
@@ -110,8 +111,9 @@ class JobApiService {
 
     var response = await dio.post(
       '$baseUrl/apply',
-      data: formData,
+      data: formData
     );
+    
     if (response.statusCode == 200) {
     } else {
       // Handle the response or error here
@@ -121,27 +123,6 @@ class JobApiService {
   }
 
   static Future<JobsModel> fetchSuccessfulApplyingJob() async {
-    // try {
-    //   final dio = Dio();
-    //   SharedPreferences preferences = await SharedPreferences.getInstance();
-    //   dio.options.headers['Authorization'] =
-    //       'Bearer ${preferences.getString(kUserToken)}';
-    //   var response =
-    //       await dio.get('$baseUrl/jobs/${preferences.getInt(kJobId)}');
-
-    //   List<JobsModel> jobs = [];
-    //   var items = response.data['data'];
-    //   for (var jobMap in items) {
-    //     try {
-    //       jobs.add(JobsModel.fromJson(jobMap));
-    //     } catch (e) {
-    //       jobs.add(JobsModel.fromJson(jobMap));
-    //     }
-    //   }
-    //   return jobs;
-    // } catch (e) {
-    //   throw Exception(e.toString());
-    // }
     SharedPreferences preferences = await SharedPreferences.getInstance();
     HttpClient httpClient = HttpClient();
     httpClient.badCertificateCallback =
@@ -159,6 +140,30 @@ class JobApiService {
       return JobsModel.fromJson(data);
     } else {
       throw Exception('Failed to load album');
+    }
+  }
+
+   static Future<List<ApplyJobsModel>> fetchAppliedJobs() async {
+    try {
+      final dio = Dio();
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      dio.options.headers['Authorization'] =
+          'Bearer ${preferences.getString(kUserToken)}';
+      var response = await dio.get('$baseUrl/apply/${preferences.getInt(kUserId)}');
+
+      List<ApplyJobsModel> jobs = [];
+      var items = response.data['data'];
+      for (var jobMap in items) {
+        try {
+          jobs.add(ApplyJobsModel.fromJson(jobMap));
+        } catch (e) {
+          log(e.toString());
+        }
+      }
+
+      return jobs;
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

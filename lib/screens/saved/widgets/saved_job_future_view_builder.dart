@@ -3,18 +3,24 @@ import 'package:job_finder_app/screens/saved/widgets/saved_list_view.dart';
 import 'package:job_finder_app/services/favorites_api_service.dart';
 
 import '../../../utils/app_fonts.dart';
-import '../../../utils/app_images.dart';
+import 'no_saved_jobs.dart';
 
-class SavedJobViewFutureBuilder extends StatelessWidget {
+class SavedJobViewFutureBuilder extends StatefulWidget {
   const SavedJobViewFutureBuilder({super.key});
 
+  @override
+  State<SavedJobViewFutureBuilder> createState() =>
+      _SavedJobViewFutureBuilderState();
+}
+
+class _SavedJobViewFutureBuilderState extends State<SavedJobViewFutureBuilder> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: FavoritesApiService.fetchAllFavoritesJobs(),
       builder: (context, snapshot) {
         if ((snapshot.data?.isEmpty ?? true)) {
-          return const SingleChildScrollView(child: NoSavedJobs());
+          return const NoSavedJobs();
         }
         if (!snapshot.hasError) {
           if (snapshot.connectionState == ConnectionState.done) {
@@ -50,51 +56,6 @@ class SavedJobViewFutureBuilder extends StatelessWidget {
           );
         }
       },
-    );
-  }
-}
-
-class NoSavedJobs extends StatelessWidget {
-  const NoSavedJobs({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Image.asset(AppImages.kSavedIlustration),
-            const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              'Nothing has been saved yet',
-              style: TextStyle(
-                  fontSize: 24,
-                  fontFamily: AppFonts.kRegisterHeadlineFont,
-                  color: Color(0xff111827)),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'Press the star icon on the job you want to save.',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Color(0xff6B7280),
-                  fontFamily: AppFonts.kRegisterHintFont,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

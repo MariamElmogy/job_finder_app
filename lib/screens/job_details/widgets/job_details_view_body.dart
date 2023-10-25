@@ -40,7 +40,6 @@ class _JobDetailsViewBodyState extends State<JobDetailsViewBody> {
           ),
         ),
         SliverFillRemaining(
-       
           child: counter == 0
               ? JobDescription(
                   job: widget.job,

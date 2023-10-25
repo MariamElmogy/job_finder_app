@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/utils/app_fonts.dart';
 
+import '../../../utils/app_fonts.dart';
+import '../../../utils/app_images.dart';
 import '../../job_details/widgets/job_detail.dart';
+import 'applied_job_view_future_builder.dart';
 
 class AppliedViewBody extends StatefulWidget {
   const AppliedViewBody({super.key});
@@ -34,28 +36,59 @@ class _AppliedViewBodyState extends State<AppliedViewBody> {
           ),
         ),
         SliverToBoxAdapter(
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              vertical: 8,
-              horizontal: 16,
-            ),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: const Color(0xffE5E7EB),
-              ),
-              color: const Color(0xffF4F4F5),
-            ),
-            child: const Text(
-              '3 Jobs',
-              style: TextStyle(
-                color: Color(0xff6B7280),
-                fontSize: 14,
-                fontFamily: AppFonts.kLoginHeadlineFont,
-              ),
-            ),
-          ),
+          child: counter == 0
+              ? const AppliedJobViewFutureBuilder()
+              : const CustomRejectedAppliedJob(),
         ),
       ],
+    );
+  }
+}
+
+class CustomRejectedAppliedJob extends StatelessWidget {
+  const CustomRejectedAppliedJob({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(AppImages.kNoDataIlustration),
+            const SizedBox(
+              height: 20,
+            ),
+            const Text(
+              'No applications were rejected',
+              style: TextStyle(
+                fontSize: 24,
+                fontFamily: AppFonts.kRegisterHeadlineFont,
+                color: Color(0xff111827),
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                'If there is an application that is rejected by the company it will appear here',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Color(0xff6B7280),
+                  fontFamily: AppFonts.kRegisterHintFont,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

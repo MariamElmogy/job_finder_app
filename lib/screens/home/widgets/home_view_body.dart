@@ -57,12 +57,13 @@ class HomeViewBody extends StatelessWidget {
               ),
             ),
           ),
-          const SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 8),
-              child: SuccessfulApplyingViewFutureBuilder(),
+          if (applicationState._dataSubmitted)
+            const SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: SuccessfulApplyingViewFutureBuilder(),
+              ),
             ),
-          ),
           const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 20.0),

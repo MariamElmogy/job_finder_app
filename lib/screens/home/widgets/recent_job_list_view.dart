@@ -22,6 +22,7 @@ class RecentJobListView extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             var currentJob = jobsModel[index];
+            
             Navigator.push(
               context,
               MaterialPageRoute(

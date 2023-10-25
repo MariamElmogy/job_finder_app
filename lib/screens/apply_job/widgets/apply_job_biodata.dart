@@ -17,7 +17,9 @@ class _ApplyJobBiodataState extends State<ApplyJobBiodata> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: ApplyJobForm(jobId: widget.jobId),
+        child: ApplyJobForm(
+          jobId: widget.jobId,
+        ),
       ),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/models/user_model.dart';
-import 'package:job_finder_app/screens/profile/notification_settings/views/notification_settings_view.dart';
 import 'package:job_finder_app/services/user_api_service.dart';
 import 'package:job_finder_app/utils/app_colors.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
@@ -49,7 +48,9 @@ class CustomHomeAppBar extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return  NotificationView();
+                      return NotificationView(
+                        notificationStatus: true,
+                      );
                     },
                   ),
                 ),

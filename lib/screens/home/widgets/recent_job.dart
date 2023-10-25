@@ -1,16 +1,43 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/models/jobs_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../services/favorites_api_service.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_images.dart';
 import '../../../utils/constants.dart';
 
-class RecentJob extends StatelessWidget {
+class RecentJob extends StatefulWidget {
   const RecentJob({
     super.key,
     required this.job,
   });
   final JobsModel job;
+
+  @override
+  State<RecentJob> createState() => _RecentJobState();
+}
+
+class _RecentJobState extends State<RecentJob> {
+  bool isSaved = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkIfJobIsSaved();
+  }
+
+  void checkIfJobIsSaved() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> savedJobs = prefs.getStringList('savedJobs') ?? [];
+    if (savedJobs.contains(widget.job.name)) {
+      setState(() {
+        isSaved = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +48,7 @@ class RecentJob extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.network(
-                job.image ?? '',
+                widget.job.image ?? '',
                 width: 40,
                 height: 40,
               ),
@@ -31,7 +58,7 @@ class RecentJob extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  job.name ?? '',
+                  widget.job.name ?? '',
                   style: const TextStyle(
                     fontSize: 18,
                     color: Colors.black,
@@ -40,7 +67,7 @@ class RecentJob extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
                   child: Text(
-                    '${job.comp_name} • ${showLocation(job.location ?? '')}',
+                    '${widget.job.comp_name} • ${showLocation(widget.job.location ?? '')}',
                     style: const TextStyle(
                       fontSize: 12,
                       color: Color(0xff374151),
@@ -50,12 +77,23 @@ class RecentJob extends StatelessWidget {
               ],
             ),
             const Spacer(),
-            ColorFiltered(
-              colorFilter: const ColorFilter.mode(
-                Colors.black,
-                BlendMode.modulate,
-              ),
-              child: Image.asset(AppImages.kArchiveMinus),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  isSaved = !isSaved; // toggle saved state
+                });
+                if (isSaved) {
+                  FavoritesApiService.addFavoritesJobs(
+                      job_id: widget.job.id.toString());
+                  saveJob(widget.job.name, remove: false);
+                } else {
+                  FavoritesApiService.deleteJob(widget.job);
+                  saveJob(widget.job.name, remove: true);
+                }
+              },
+              child: isSaved
+                  ? Image.asset(AppImages.kArchiveMinusColor)
+                  : Image.asset(AppImages.kArchive),
             ),
           ],
         ),
@@ -73,7 +111,7 @@ class RecentJob extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    job.job_time_type ?? '',
+                    widget.job.job_time_type ?? '',
                     style: const TextStyle(
                       fontSize: 12,
                       color: Color(0xff3366FF),
@@ -85,7 +123,7 @@ class RecentJob extends StatelessWidget {
             const Spacer(),
             RichText(
               text: TextSpan(
-                text: '\$${showSalary(job.salary ?? '')}',
+                text: '\$${showSalary(widget.job.salary ?? '')}',
                 style: const TextStyle(
                   fontSize: 16,
                   color: Color(0xff2E8E18),
@@ -113,4 +151,23 @@ class RecentJob extends StatelessWidget {
       ],
     );
   }
+}
+
+saveJob(job, {required bool remove}) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  List<String> savedJobs = prefs.getStringList('savedJobs') ?? [];
+  if (remove) {
+    // check if job is in the list
+    if (savedJobs.contains(job)) {
+      savedJobs.remove(job);
+      await prefs.setStringList('savedJobs', savedJobs);
+    }
+  } else {
+    if (!savedJobs.contains(job)) {
+      // check if job is not already in the list
+      savedJobs.add(job);
+      await prefs.setStringList('savedJobs', savedJobs);
+    }
+  }
+  log(savedJobs.toString());
 }

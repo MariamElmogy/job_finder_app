@@ -19,7 +19,9 @@ class FilterItem extends StatelessWidget {
         return Column(
           children: [
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                
+              },
               child: Container(
                 width: double.infinity,
                 padding:

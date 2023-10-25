@@ -11,6 +11,7 @@ class SavedView extends StatelessWidget {
         toolbarHeight: 70,
         elevation: 0,
         backgroundColor: Colors.white,
+        leading: const Icon(Icons.arrow_back),
         title: const Text(
           'Saved',
           style: TextStyle(
@@ -18,13 +19,11 @@ class SavedView extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: const SafeArea(
         child: SavedViewBody(),
       ),
-      
     );
   }
 }

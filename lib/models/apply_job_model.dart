@@ -9,6 +9,7 @@ class ApplyJobsModel {
   String? other_file;
   int? user_id;
   int? jobs_id;
+  int? reviewed;
 
   ApplyJobsModel({
     this.cv_file,
@@ -19,6 +20,7 @@ class ApplyJobsModel {
     this.other_file,
     this.user_id,
     this.jobs_id,
+    this.reviewed,
   });
 
   factory ApplyJobsModel.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,7 @@ class ApplyJobsModel {
       other_file: json['other_file'],
       user_id: json['user_id'],
       jobs_id: json['jobs_id'],
+      reviewed: json['reviewed'],
     );
   }
   Map<String, dynamic> toJson() {
@@ -43,6 +46,7 @@ class ApplyJobsModel {
       'other_file': other_file,
       'user_id': user_id,
       'jobs_id': jobs_id,
+      'reviewed': reviewed,
     };
   }
 }
