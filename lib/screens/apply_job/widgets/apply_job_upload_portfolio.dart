@@ -66,10 +66,8 @@ class _ApplyJobUploadPortfolioState extends State<ApplyJobUploadPortfolio> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const ApplyingProcess(
-                  stepCompletionStatus: [true, true, false],
+                 ApplyingProcess(
                   currentStep: 3,
-                  totalSteps: 3,
                 ),
                 const SizedBox(height: 25),
                 const ApplyFormHeadline(

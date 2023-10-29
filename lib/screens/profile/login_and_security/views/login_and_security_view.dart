@@ -60,13 +60,14 @@ class _LoginAndSecurityViewState extends State<LoginAndSecurityView> {
               ),
             ),
           ),
+          const SizedBox(height: 16),
           SizedBox(
             child: ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: title.length,
               itemBuilder: (context, index) {
-                return ListTile(
+                return GestureDetector(
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -75,9 +76,44 @@ class _LoginAndSecurityViewState extends State<LoginAndSecurityView> {
                       },
                     ),
                   ),
-                  trailing: const Icon(Icons.arrow_forward),
-                  title: Text(
-                    title[index],
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 10),
+                    child: Row(
+                      children: [
+                        Text(
+                          title[index],
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppFonts.kLoginSubHeadlineFont,
+                            color: Color(0xff111827),
+                          ),
+                        ),
+                        const Spacer(),
+                        index == 0
+                            ? const Text(
+                                'John@gmail.com',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppFonts.kLoginSubHeadlineFont,
+                                  color: Color(0xff6B7280),
+                                ),
+                              )
+                            : index == 3
+                                ? const Text(
+                                    'Non active',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily:
+                                          AppFonts.kLoginSubHeadlineFont,
+                                      color: Color(0xff6B7280),
+                                    ),
+                                  )
+                                : const Text(''),
+                        const SizedBox(width: 12),
+                        const Icon(Icons.arrow_forward_sharp),
+                      ],
+                    ),
                   ),
                 );
               },

@@ -21,7 +21,6 @@ class ApplyJobForm extends StatefulWidget {
 }
 
 class _ApplyJobFormState extends State<ApplyJobForm> {
-//
   final _formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   String name = '';
@@ -32,10 +31,10 @@ class _ApplyJobFormState extends State<ApplyJobForm> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const ApplyingProcess(
-            stepCompletionStatus: [false, false, false],
+           ApplyingProcess(
+            // stepCompletionStatus: [false, false, false],
             currentStep: 1,
-            totalSteps: 3,
+            // totalSteps: 3,
           ),
           const SizedBox(height: 25),
           const ApplyFormHeadline(

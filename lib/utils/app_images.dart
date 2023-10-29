@@ -64,6 +64,7 @@ abstract class AppImages {
   static const kSavedIlustration = 'assets/images/Saved_Ilustration.png';
   static const kDirectbox = 'assets/images/directbox-default-2.png';
   static const kExport = 'assets/images/export.png';
+  static const kExportColor = 'assets/images/export-color.png';
   static const kDanaLogo = 'assets/images/DanaLogo.png';
   static const kSlackLogo = 'assets/images/SlackLogo.png';
   static const kShoopeLogo = 'assets/images/ShoopeLogo.png';

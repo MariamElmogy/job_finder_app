@@ -29,10 +29,9 @@ class AppliedJobItem extends StatelessWidget {
               border: Border.all(color: const Color(0xffD1D5DB)),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: const ApplyingProcess(
+            child:  ApplyingProcess(
                 currentStep: 4,
-                totalSteps: 3,
-                stepCompletionStatus: [true, true, true]),
+                ),
           ),
         ],
       ),

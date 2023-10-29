@@ -58,10 +58,10 @@ class ApplyJobTypeOfWorkState extends State<ApplyJobTypeOfWork> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ApplyingProcess(
-                stepCompletionStatus: [true, false, false],
+               ApplyingProcess(
+                // stepCompletionStatus: [true, false, false],
                 currentStep: 2,
-                totalSteps: 3,
+                // totalSteps: 3,
               ),
               const SizedBox(height: 25),
               const Padding(
