@@ -39,7 +39,9 @@ class _OnBoardingViewBodyPageViewState
       itemCount: content.length,
       itemBuilder: (context, index) {
         return OnBoardingViewBody(
-            index: index, pageController: pageController!);
+          index: index,
+          pageController: pageController!,
+        );
       },
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/screens/login/views/login_view.dart';
 import 'package:job_finder_app/screens/profile/widgets/profile_view_body.dart';
+import 'package:job_finder_app/utils/app_images.dart';
 import 'package:job_finder_app/utils/constants.dart';
 
 class ProfileView extends StatelessWidget {
@@ -28,15 +29,15 @@ class ProfileView extends StatelessWidget {
               ),
               centerTitle: true,
               actions: [
-                IconButton(
-                  onPressed: () {
+                GestureDetector(
+                  onTap: () {
                     removeEmailFromSharedPreferences();
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext ctx) => const LoginView()));
                   },
-                  icon: const Icon(Icons.exit_to_app),
+                  child: Image.asset(AppImages.kLogout),
                 ),
               ],
             ),

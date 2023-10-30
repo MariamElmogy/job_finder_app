@@ -81,4 +81,6 @@ abstract class AppImages {
   static const kSearchIlustration = 'assets/images/SearchIlustration.png';
   static const kArchiveMinusColor = 'assets/images/archive-minus-colored.png';
   static const kNoDataIlustration = 'assets/images/NoDataIlustration.png';
+  static const kLogout = 'assets/images/logout.png';
+  
 }

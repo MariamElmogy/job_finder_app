@@ -1,4 +1,6 @@
-import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../utils/constants.dart';
 
 class ApplyJobsModel {
   String? cv_file;
@@ -9,7 +11,6 @@ class ApplyJobsModel {
   String? other_file;
   int? user_id;
   int? jobs_id;
-  int? reviewed;
 
   ApplyJobsModel({
     this.cv_file,
@@ -20,7 +21,6 @@ class ApplyJobsModel {
     this.other_file,
     this.user_id,
     this.jobs_id,
-    this.reviewed,
   });
 
   factory ApplyJobsModel.fromJson(Map<String, dynamic> json) {
@@ -33,10 +33,10 @@ class ApplyJobsModel {
       other_file: json['other_file'],
       user_id: json['user_id'],
       jobs_id: json['jobs_id'],
-      reviewed: json['reviewed'],
     );
   }
-  Map<String, dynamic> toJson() {
+  Future<Map<String, dynamic>> toJson() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return {
       'cv_file': cv_file,
       'name': name,
@@ -44,9 +44,8 @@ class ApplyJobsModel {
       'mobile': mobile,
       'work_type': work_type,
       'other_file': other_file,
-      'user_id': user_id,
+      'user_id': sharedPreferences.getInt(kUserId),
       'jobs_id': jobs_id,
-      'reviewed': reviewed,
     };
   }
 }

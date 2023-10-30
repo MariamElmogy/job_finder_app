@@ -31,6 +31,7 @@ class UserApiService {
 
       log(jsonEncode(jsonDecode(response.body)['data']['id']));
       preferences.setInt(kUserId, jsonDecode(response.body)['data']['id']);
+      preferences.setString(kUserName, jsonDecode(response.body)['data']['name']);
 
       log(preferences.getString(kUserToken).toString());
       UserModel user = UserModel.fromJson(jsonDecode(response.body)['data']);

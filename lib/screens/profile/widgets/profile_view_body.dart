@@ -114,50 +114,6 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                     ),
                   ],
                 ),
-                // const SizedBox(height: 16),
-                // ProfileDetails(
-                //   model: snapshot.data!,
-                // ),
-                // Column(
-                //   crossAxisAlignment: CrossAxisAlignment.start,
-                //   children: [
-                //     const ProfileUserAbout(),
-                //     const SizedBox(height: 20),
-                //     Container(
-                //       width: double.infinity,
-                //       padding: const EdgeInsets.symmetric(
-                //           horizontal: 16, vertical: 10),
-                //       color: const Color(0xffE5E7EB),
-                //       child: const Text(
-                //         'General',
-                //         style: TextStyle(
-                //           fontSize: 14,
-                //           color: Color(0xff6B7280),
-                //           fontFamily: AppFonts.kLoginHeadlineFont,
-                //         ),
-                //       ),
-                //     ),
-                //     const SizedBox(height: 20),
-                //     const GeneralListView(),
-                //     const SizedBox(height: 20),
-                //     Container(
-                //       width: double.infinity,
-                //       padding: const EdgeInsets.symmetric(
-                //           horizontal: 16, vertical: 10),
-                //       color: const Color(0xffE5E7EB),
-                //       child: const Text(
-                //         'Others',
-                //         style: TextStyle(
-                //           fontSize: 14,
-                //           color: Color(0xff6B7280),
-                //           fontFamily: AppFonts.kLoginHeadlineFont,
-                //         ),
-                //       ),
-                //     ),
-                //     const SizedBox(height: 20),
-                //     const OthersListView(),
-                //   ],
-                // ),
               ],
             );
           }

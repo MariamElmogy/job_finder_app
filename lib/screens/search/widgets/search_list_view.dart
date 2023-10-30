@@ -1,33 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/models/jobs_model.dart';
-import 'package:job_finder_app/screens/search/widgets/seach_bar_item.dart';
+import 'package:job_finder_app/screens/home/widgets/recent_job.dart';
 
 import '../../job_details/views/job_details_view.dart';
 
-class SearchBarListView extends StatefulWidget {
-  const SearchBarListView({
-    super.key,
-    required this.jobsModel,
-  });
-
-  final List<JobsModel> jobsModel;
-
-  @override
-  State<SearchBarListView> createState() => _SearchBarListViewState();
-}
-
-class _SearchBarListViewState extends State<SearchBarListView> {
+class SearchListView extends StatelessWidget {
+  const SearchListView({super.key, required this.jobs});
+  final List<JobsModel> jobs;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: widget.jobsModel.length,
+      shrinkWrap: true,
+      itemCount: jobs.length,
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            var currentJob = widget.jobsModel[index];
-
+            var currentJob = jobs[index];
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -39,7 +28,10 @@ class _SearchBarListViewState extends State<SearchBarListView> {
               ),
             );
           },
-          child: SearchBarItem(job: widget.jobsModel[index]),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: RecentJob(job: jobs[index]),
+          ),
         );
       },
     );

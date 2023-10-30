@@ -2,13 +2,16 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:http/io_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../models/user_model.dart';
 import '../../utils/constants.dart';
 
 part 'login_state.dart';
@@ -33,23 +36,11 @@ class LoginCubit extends Cubit<LoginState> {
         log('data in the cubit login ${data.toString()}');
         log(data['token']);
         preferences.setString(kUserToken, data['token']);
-        UserCredential credential = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: email, password: password);
-
-        log(credential.user!.displayName.toString());
         emit(LoginSuccess());
       } else {
         log('failed');
         LoginFailure(errMessage: "failed");
       }
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-        
-      }
-      LoginFailure(errMessage: e.toString());
     } catch (e) {
       log('an error in login cubit ${e.toString()}');
       LoginFailure(errMessage: e.toString());

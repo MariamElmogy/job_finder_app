@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/screens/on_boarding/views/on_boarding_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,8 +32,6 @@ class _SplashViewState extends State<SplashView> {
   void navigationControl() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var email = prefs.getString(kEmail);
-    // log(prefs.getString(kUserToken).toString());
-    // log(prefs.getInt(kJobId).toString());
     Future.delayed(
       const Duration(seconds: 2),
       () {
@@ -43,7 +39,7 @@ class _SplashViewState extends State<SplashView> {
             context,
             MaterialPageRoute(
                 builder: (BuildContext ctx) =>
-                    email == null ? const OnBoardingView() :  HomeView()));
+                    email == null ? const OnBoardingView() : HomeView()));
       },
     );
   }

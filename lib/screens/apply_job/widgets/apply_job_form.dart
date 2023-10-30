@@ -31,15 +31,14 @@ class _ApplyJobFormState extends State<ApplyJobForm> {
     return SingleChildScrollView(
       child: Column(
         children: [
-           ApplyingProcess(
-            // stepCompletionStatus: [false, false, false],
+          ApplyingProcess(
             currentStep: 1,
-            // totalSteps: 3,
           ),
           const SizedBox(height: 25),
           const ApplyFormHeadline(
-              headline: 'Biodata',
-              subheadline: 'Fill in your bio data correctly'),
+            headline: 'Biodata',
+            subheadline: 'Fill in your bio data correctly',
+          ),
           Column(
             children: [
               Form(

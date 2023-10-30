@@ -90,8 +90,8 @@ class JobApiService {
       required otherFile,
       required jobId}) async {
     var dio = Dio();
-    dio.options.followRedirects = true; // Allow following redirects
-    dio.options.maxRedirects = 5; // Maximum number of redirects to follow
+    // dio.options.followRedirects = true; // Allow following redirects
+    // dio.options.maxRedirects = 5; // Maximum number of redirects to follow
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
     dio.options.headers['Authorization'] =
@@ -109,11 +109,8 @@ class JobApiService {
 
     preferences.setInt(kJobId, jobId);
 
-    var response = await dio.post(
-      '$baseUrl/apply',
-      data: formData
-    );
-    
+    var response = await dio.post('$baseUrl/apply', data: formData);
+
     if (response.statusCode == 200) {
     } else {
       // Handle the response or error here
@@ -143,13 +140,14 @@ class JobApiService {
     }
   }
 
-   static Future<List<ApplyJobsModel>> fetchAppliedJobs() async {
+  static Future<List<ApplyJobsModel>> fetchAppliedJobs() async {
     try {
       final dio = Dio();
       SharedPreferences preferences = await SharedPreferences.getInstance();
       dio.options.headers['Authorization'] =
           'Bearer ${preferences.getString(kUserToken)}';
-      var response = await dio.get('$baseUrl/apply/${preferences.getInt(kUserId)}');
+      var response =
+          await dio.get('$baseUrl/apply/${preferences.getInt(kUserId)}');
 
       List<ApplyJobsModel> jobs = [];
       var items = response.data['data'];

@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const kUsersCollections = 'users';
 const kKeepMeLoggedIn = 'keepMeLoggedIn';
 const kUserId = 'userId';
+const kUserName = 'userName';
+
 const kJobId = 'jobId';
 const kUserToken = 'userToken';
 const baseUrl = 'https://project2.amit-learning.com/api';
@@ -10,8 +13,6 @@ const kEmail = 'email';
 const kisFilled = 'email';
 const kMessagesCollections = 'messages';
 const kMessage = 'message';
-
-
 
 String showSalary(String salary) {
   if (salary.endsWith('000')) {
@@ -30,4 +31,5 @@ String showLocation(String word) {
 Future<void> removeEmailFromSharedPreferences() async {
   final prefs = await SharedPreferences.getInstance();
   prefs.remove(kEmail);
+  await FirebaseAuth.instance.signOut();
 }

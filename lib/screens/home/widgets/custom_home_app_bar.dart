@@ -31,7 +31,7 @@ class CustomHomeAppBar extends StatelessWidget {
                         color: AppColors.kLoginHeadlines,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 8), 
                     const Text(
                       'Create a better future for yourself here',
                       style: TextStyle(

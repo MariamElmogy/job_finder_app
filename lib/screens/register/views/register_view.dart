@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_finder_app/cubits/register_cubit/register_cubit.dart';
-import 'package:job_finder_app/screens/register/views/register_view_body_bloc_consumer.dart';
+import 'package:job_finder_app/screens/register/widgets/register_view_body_bloc_consumer.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});

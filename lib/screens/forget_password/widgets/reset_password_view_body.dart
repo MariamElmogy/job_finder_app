@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:job_finder_app/custom_widgets/custom_button.dart';
 import 'package:job_finder_app/custom_widgets/custom_success_processes.dart';
 import 'package:job_finder_app/custom_widgets/custom_textfield.dart';
-import 'package:job_finder_app/screens/home/views/home_view.dart';
+import 'package:job_finder_app/screens/login/views/login_view.dart';
 import 'package:job_finder_app/services/user_api_service.dart';
 import 'package:job_finder_app/utils/app_colors.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
@@ -49,61 +49,63 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
           ),
         ),
         const SizedBox(height: 20),
-        Column(
-          children: [
-            Form(
-              key: formKey,
-              autovalidateMode: autovalidateMode,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomTextField(
-                    hintText: 'Enter your new password...',
-                    image: AppImages.kPassword,
-                    isPasswordCorrect: true,
-                    onSaved: (value) {
-                      password = value!.trim();
-                    },
-                  ),
-                  // const SizedBox(height: 5),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                      'Password must be at least 8 characters',
-                      style: TextStyle(
-                        color: Color(0xff9CA3AF),
-                        fontSize: 16,
-                        fontFamily: AppFonts.kLoginSubHeadlineFont,
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Form(
+                  key: formKey,
+                  autovalidateMode: autovalidateMode,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomTextField(
+                        hintText: 'Enter your new password...',
+                        image: AppImages.kPassword,
+                        isPasswordCorrect: true,
+                        onSaved: (value) {
+                          password = value!.trim();
+                        },
                       ),
-                    ),
-                  ),
-                  // const SizedBox(height: 8),
-                  CustomTextField(
-                    hintText: 'Rewrite your new password...',
-                    image: AppImages.kPassword,
-                    isPasswordCorrect: true,
-                    onSaved: (value) {
-                      confirmPassword = value!.trim();
-                    },
-                  ),
-                  // const SizedBox(height: 5),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                      'Both password must match',
-                      style: TextStyle(
-                        color: Color(0xff9CA3AF),
-                        fontSize: 16,
-                        fontFamily: AppFonts.kLoginSubHeadlineFont,
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          'Password must be at least 8 characters',
+                          style: TextStyle(
+                            color: Color(0xff9CA3AF),
+                            fontSize: 16,
+                            fontFamily: AppFonts.kLoginSubHeadlineFont,
+                          ),
+                        ),
                       ),
-                    ),
+                      const SizedBox(height: 16),
+                      CustomTextField(
+                        hintText: 'Rewrite your new password...',
+                        image: AppImages.kPassword,
+                        isPasswordCorrect: true,
+                        onSaved: (value) {
+                          confirmPassword = value!.trim();
+                        },
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          'Both password must match',
+                          style: TextStyle(
+                            color: Color(0xff9CA3AF),
+                            fontSize: 16,
+                            fontFamily: AppFonts.kLoginSubHeadlineFont,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-        const Spacer(),
+        // const Spacer(),
         CustomButton(
           onPressed: () {
             if (formKey.currentState!.validate()) {
@@ -122,7 +124,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(
                           builder: (context) {
-                            return  HomeView();
+                            return const LoginView();
                           },
                         ));
                       },
@@ -130,7 +132,6 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                   },
                 ));
               } else {
-                // Passwords don't match, show an error message.
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Passwords do not match.'),

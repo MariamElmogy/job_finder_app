@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/screens/home/widgets/custom_search_bar_view.dart';
 import 'package:job_finder_app/screens/home/widgets/recent_job_view_future_builder.dart';
 import 'package:job_finder_app/screens/home/widgets/successful_applying_view_future_builder.dart';
 import 'package:job_finder_app/screens/home/widgets/suggest_job_view_futureBuilder.dart';
+import 'package:job_finder_app/screens/search/views/search_view.dart';
 import 'package:provider/provider.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_images.dart';
@@ -29,7 +29,7 @@ class HomeViewBody extends StatelessWidget {
               child: GestureDetector(
                 onTap: () => Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return const CustomSearchBarView();
+                    return const SearchView();
                   },
                 )),
                 child: Container(

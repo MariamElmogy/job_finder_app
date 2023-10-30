@@ -125,20 +125,3 @@ class _RegisterFormState extends State<RegisterForm> {
     );
   }
 }
-
-
-
-            // CustomButton(
-            //   onPressed: () async {
-            //     if (_formKey.currentState!.validate()) {
-            //       _formKey.currentState?.save();
-            //       // BlocProvider.of<RegisterCubit>(context)
-            //       //     .registerUser(userModel);
-            //     } else {
-            //       setState(() {
-            //         autovalidateMode = AutovalidateMode.always;
-            //       });
-            //     }
-            //   },
-            //   text: "Create account",
-            // ),

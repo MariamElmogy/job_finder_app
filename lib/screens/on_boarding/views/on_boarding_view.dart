@@ -14,7 +14,9 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: SafeArea(child: OnBoardingViewBodyPageView()),
+      body: SafeArea(
+        child: OnBoardingViewBodyPageView(),
+      ),
     );
   }
 }
