@@ -15,6 +15,7 @@ class MyMessageBubble extends StatelessWidget {
         padding:
             const EdgeInsets.only(left: 16, top: 16, bottom: 16, right: 16),
         margin: const EdgeInsets.symmetric(vertical: 8),
+        width: MediaQuery.of(context).size.width * 0.6,
         decoration: const BoxDecoration(
             color: Color(0xff3366FF),
             borderRadius: BorderRadius.only(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/custom_widgets/custom_button.dart';
 import 'package:job_finder_app/custom_widgets/phone_text_field.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 
@@ -26,7 +25,9 @@ class _EditProfileFormState extends State<EditProfileForm> {
         children: [
           const EditProfileFormItem(title: 'Name'),
           const SizedBox(height: 20),
-          const EditProfileFormItem(title: 'Bio'),
+          const EditProfileFormItem(
+            title: 'Bio',
+          ),
           const SizedBox(height: 20),
           const EditProfileFormItem(title: 'Address'),
           const SizedBox(height: 20),
@@ -40,8 +41,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
           ),
           const SizedBox(height: 8),
           PhoneTextField(autovalidateMode: autovalidateMode),
-          const SizedBox(height: 20),
-          CustomButton(onPressed: () {}, text: 'Save')
+          const SizedBox(height: 16),
         ],
       ),
     );

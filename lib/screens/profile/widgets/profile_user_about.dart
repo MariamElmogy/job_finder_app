@@ -7,10 +7,10 @@ import 'package:job_finder_app/utils/app_images.dart';
 class ProfileUserAbout extends StatelessWidget {
   const ProfileUserAbout({
     super.key,
-    required this.model,
+    // required this.model,
   });
 
-  final UserPortofolioModel model;
+  // final UserPortofolioModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +47,9 @@ class ProfileUserAbout extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          Text(
-            'I\'m ${model.name}, I’m UI/UX Designer, I have experience designing UI Design for approximately 1 year. I am currently joining the Vektora studio team based in Surakarta, Indonesia.I am a person who has a high spirit and likes to work to achieve what I dream of.',
-            style: const TextStyle(
+          const Text(
+            'I\'m Maya, I’m UI/UX Designer, I have experience designing UI Design for approximately 1 year. I am currently joining the Vektora studio team based in Surakarta, Indonesia.I am a person who has a high spirit and likes to work to achieve what I dream of.',
+            style: TextStyle(
               fontSize: 14,
               color: Color(0xff6B7280),
               fontFamily: AppFonts.kLoginSubHeadlineFont,

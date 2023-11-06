@@ -30,8 +30,9 @@ class _SplashViewState extends State<SplashView> {
 
 // home:
   void navigationControl() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var email = prefs.getString(kEmail);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    var email = sharedPreferences.getString(kEmail);
     Future.delayed(
       const Duration(seconds: 2),
       () {

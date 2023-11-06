@@ -132,14 +132,15 @@ class _LoginFormState extends State<LoginForm> {
               isButtonEnabled: isButtonEnabled,
               text: "Login",
               onPressed: () async {
+                SharedPreferences sharedPreferences =
+                    await SharedPreferences.getInstance();
+
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState?.save();
                   BlocProvider.of<LoginCubit>(context)
                       .login(email: email, password: password);
                   if (isCheckedRememberMe == true) {
-                    SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    prefs.setString(kEmail, email);
+                    sharedPreferences.setString(kEmail, email);
                   }
                 } else {
                   setState(() {

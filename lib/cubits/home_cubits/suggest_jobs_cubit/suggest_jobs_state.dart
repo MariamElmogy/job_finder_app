@@ -8,7 +8,7 @@ class SuggestJobsInitial extends SuggestJobsState {}
 class SuggestJobsLoading extends SuggestJobsState {}
 
 class SuggestJobsSuccess extends SuggestJobsState {
-  final List<JobsModel> jobs;
+  final JobsModel jobs;
   SuggestJobsSuccess(this.jobs);
 }
 

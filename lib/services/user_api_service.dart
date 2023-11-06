@@ -8,10 +8,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/constants.dart';
 import '../models/user_model.dart';
+import '../utils/shared_prefs.dart';
 
 class UserApiService {
   static Future<UserModel> fetchUserData() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
     HttpClient httpClient = HttpClient();
     httpClient.badCertificateCallback =
         ((X509Certificate cert, String host, int port) => true);
@@ -19,27 +21,24 @@ class UserApiService {
     final response = await client.get(
       Uri.parse('$baseUrl/auth/profile'),
       headers: {
-        'Authorization': 'Bearer ${preferences.getString(kUserToken)}',
+        'Authorization': 'Bearer ${SharedPrefs().token}',
       },
     );
-    // log(jsonDecode(response.body).toString());
     log(response.statusCode.toString());
     if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      log(jsonEncode(jsonDecode(response.body)['data']));
+      var data = jsonDecode(response.body)['data'];
+      log(jsonEncode(data));
+      log(sharedPreferences.getString(kUserToken).toString());
+      log(jsonEncode(data['id']));
+      sharedPreferences.setInt(kUserId, data['id']);
+      SharedPrefs().username = data['name'];
+      log('name = ${SharedPrefs().username}');
 
-      log(jsonEncode(jsonDecode(response.body)['data']['id']));
-      preferences.setInt(kUserId, jsonDecode(response.body)['data']['id']);
-      preferences.setString(kUserName, jsonDecode(response.body)['data']['name']);
+      UserModel user = UserModel.fromJson(data);
 
-      log(preferences.getString(kUserToken).toString());
-      UserModel user = UserModel.fromJson(jsonDecode(response.body)['data']);
       return user;
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load album');
+      throw Exception('Error');
     }
   }
 

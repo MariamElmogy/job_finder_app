@@ -4,9 +4,9 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:job_finder_app/utils/constants.dart';
+import 'package:job_finder_app/utils/shared_prefs.dart';
 
 import 'package:meta/meta.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/user_model.dart';
 
@@ -21,12 +21,11 @@ class RegisterCubit extends Cubit<RegisterState> {
       http.Client client = http.Client();
       const url = '$baseUrl/auth/register';
       final response = await client.post(Uri.parse(url), body: user.toJson());
-      SharedPreferences preferences = await SharedPreferences.getInstance();
 
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body.toString());
         log(data['name']);
-        preferences.setString(kUserName, data['name']);
+        SharedPrefs().username = data['name'];
         emit(RegisterSuccess());
       }
     } catch (e) {

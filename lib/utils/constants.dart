@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const kUsersCollections = 'users';
@@ -12,7 +11,10 @@ const baseUrl = 'https://project2.amit-learning.com/api';
 const kEmail = 'email';
 const kisFilled = 'email';
 const kMessagesCollections = 'messages';
+const kCompanyCollections = 'company';
 const kMessage = 'message';
+const kSavedJobs = 'savedJobs';
+const kImgUrl = 'imgUrl';
 
 String showSalary(String salary) {
   if (salary.endsWith('000')) {
@@ -29,7 +31,20 @@ String showLocation(String word) {
 }
 
 Future<void> removeEmailFromSharedPreferences() async {
-  final prefs = await SharedPreferences.getInstance();
-  prefs.remove(kEmail);
-  await FirebaseAuth.instance.signOut();
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  sharedPreferences.remove(kEmail);
+}
+
+int convertTime(String time) {
+  String timestampString = time;
+
+  DateTime timestamp = DateTime.parse(timestampString);
+
+  DateTime now = DateTime.now();
+
+  Duration difference = now.difference(timestamp);
+
+  int daysDifference = difference.inDays;
+
+  return daysDifference;
 }

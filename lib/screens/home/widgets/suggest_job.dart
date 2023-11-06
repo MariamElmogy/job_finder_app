@@ -26,7 +26,7 @@ class _SuggestJobState extends State<SuggestJob> {
 
   void checkIfJobIsSaved() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> savedJobs = prefs.getStringList('savedJobs') ?? [];
+    List<String> savedJobs = prefs.getStringList(kSavedJobs) ?? [];
     if (savedJobs.contains(widget.job.name)) {
       setState(() {
         isSaved = true;

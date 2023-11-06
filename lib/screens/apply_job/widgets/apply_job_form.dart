@@ -30,6 +30,7 @@ class _ApplyJobFormState extends State<ApplyJobForm> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ApplyingProcess(
             currentStep: 1,

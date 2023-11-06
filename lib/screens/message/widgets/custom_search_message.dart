@@ -18,7 +18,6 @@ class CustomSearchMessage extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.75,
           child: Expanded(
             child: TextField(
-              // onChanged: (value) => updateList(value),
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(vertical: 10),
                 prefixIcon: Image.asset(AppImages.kSearch),

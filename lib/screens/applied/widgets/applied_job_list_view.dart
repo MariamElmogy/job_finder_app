@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/models/apply_job_model.dart';
 
-import '../../../models/jobs_model.dart';
 import 'applied_job_item.dart';
 
 class AppliedJobListView extends StatelessWidget {
@@ -20,7 +19,6 @@ class AppliedJobListView extends StatelessWidget {
       itemCount: jobsModel.length,
       itemBuilder: (context, index) {
         return GestureDetector(
-          
           child: AppliedJobItem(
             job: jobsModel[index],
           ),

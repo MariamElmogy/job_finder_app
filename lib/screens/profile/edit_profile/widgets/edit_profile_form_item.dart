@@ -27,8 +27,14 @@ class EditProfileFormItem extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         TextFormField(
-          decoration: const InputDecoration(
-            enabledBorder: OutlineInputBorder(
+          decoration: InputDecoration(
+            hintText: title,
+            hintStyle: const TextStyle(
+              color: AppColors.kRegisterHints,
+              fontSize: 14,
+              fontFamily: AppFonts.kRegisterHintFont,
+            ),
+            enabledBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(8),
               ),
@@ -36,13 +42,13 @@ class EditProfileFormItem extends StatelessWidget {
                 color: AppColors.kBoarderColor,
               ),
             ),
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(8),
               ),
               borderSide: BorderSide(color: AppColors.kBorderFocusColor),
             ),
-            errorBorder: OutlineInputBorder(
+            errorBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(8),
               ),

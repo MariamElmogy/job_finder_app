@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/models/user_model.dart';
-import 'package:job_finder_app/models/user_portofolio_model.dart';
+import 'package:job_finder_app/screens/home/widgets/custom_home_app_bar.dart';
 import 'package:job_finder_app/screens/profile/widgets/profile_information.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
+import 'package:job_finder_app/utils/shared_prefs.dart';
 
 class ProfileDetails extends StatelessWidget {
   const ProfileDetails({
     super.key,
-    required this.model,
   });
-
-  final UserPortofolioModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +15,14 @@ class ProfileDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          model.name!,
+          SharedPrefs().username.capitalize(),
           style: const TextStyle(
             fontFamily: AppFonts.kLoginHeadlineFont,
             fontSize: 20,
             color: Color(0xff111827),
           ),
         ),
+        const SizedBox(height: 10),
         const Text(
           'Senior UI/UX Designer',
           style: TextStyle(

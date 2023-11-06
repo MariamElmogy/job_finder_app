@@ -189,8 +189,8 @@ class _WorkLocationOptionsViewState extends State<WorkLocationOptionsView> {
               CustomButton(
                 text: 'Next',
                 onPressed: () {
-                  User? currentUser = FirebaseAuth.instance.currentUser;
-                  if (currentUser != null) {
+                  // User? currentUser = FirebaseAuth.instance.currentUser;
+                  // if (currentUser != null) {
                     // UserModel userModel =
                     //     UserModel(countries: selectedCountries);
                     // updateUser(currentUser, userModel, {
@@ -199,7 +199,7 @@ class _WorkLocationOptionsViewState extends State<WorkLocationOptionsView> {
                     // });
                     // log('Data is updated');
                     // log(userModel.toJson().toString());
-                  }
+                  // }
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
                       return CustomSuccessProcesses(

@@ -8,6 +8,7 @@ import 'package:job_finder_app/utils/app_images.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../services/favorites_api_service.dart';
+import '../../../utils/constants.dart';
 import '../../home/widgets/recent_job.dart';
 
 class JobDetailsView extends StatefulWidget {
@@ -30,7 +31,7 @@ class _JobDetailsViewState extends State<JobDetailsView> {
 
   void checkIfJobIsSaved(String job) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> savedJobs = prefs.getStringList('savedJobs') ?? [];
+    List<String> savedJobs = prefs.getStringList(kSavedJobs) ?? [];
     if (savedJobs.contains(job)) {
       setState(() {
         isSaved = true;

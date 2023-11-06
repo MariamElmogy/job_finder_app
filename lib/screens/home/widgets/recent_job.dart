@@ -31,7 +31,7 @@ class _RecentJobState extends State<RecentJob> {
 
   void checkIfJobIsSaved() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> savedJobs = prefs.getStringList('savedJobs') ?? [];
+    List<String> savedJobs = prefs.getStringList(kSavedJobs) ?? [];
     if (savedJobs.contains(widget.job.name)) {
       setState(() {
         isSaved = true;
@@ -155,18 +155,18 @@ class _RecentJobState extends State<RecentJob> {
 
 saveJob(job, {required bool remove}) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  List<String> savedJobs = prefs.getStringList('savedJobs') ?? [];
+  List<String> savedJobs = prefs.getStringList(kSavedJobs) ?? [];
   if (remove) {
     // check if job is in the list
     if (savedJobs.contains(job)) {
       savedJobs.remove(job);
-      await prefs.setStringList('savedJobs', savedJobs);
+      await prefs.setStringList(kSavedJobs, savedJobs);
     }
   } else {
     if (!savedJobs.contains(job)) {
       // check if job is not already in the list
       savedJobs.add(job);
-      await prefs.setStringList('savedJobs', savedJobs);
+      await prefs.setStringList(kSavedJobs, savedJobs);
     }
   }
   log(savedJobs.toString());

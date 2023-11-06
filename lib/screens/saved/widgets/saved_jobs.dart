@@ -128,16 +128,3 @@ class _SavedJobsState extends State<SavedJobs> {
   }
 }
 
-int convertTime(String time) {
-  String timestampString = time;
-
-  DateTime timestamp = DateTime.parse(timestampString);
-
-  DateTime now = DateTime.now();
-
-  Duration difference = now.difference(timestamp);
-
-  int daysDifference = difference.inDays;
-
-  return daysDifference;
-}

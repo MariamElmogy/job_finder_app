@@ -111,13 +111,3 @@ class _MoreItemState extends State<MoreItem> {
     );
   }
 }
-
-JobsModel convertFavoriteToJob(FavoritesJobsModel favoriteJob) {
-  return JobsModel(
-    id: favoriteJob.job_id,
-    name: favoriteJob.job_name,
-    image: favoriteJob.job_image,
-    comp_name: favoriteJob.comp_name,
-    location: favoriteJob.location,
-  );
-}

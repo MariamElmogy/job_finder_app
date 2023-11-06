@@ -4,6 +4,7 @@ import 'package:job_finder_app/screens/home/widgets/successful_applying_view_fut
 import 'package:job_finder_app/screens/home/widgets/suggest_job_view_futureBuilder.dart';
 import 'package:job_finder_app/screens/search/views/search_view.dart';
 import 'package:provider/provider.dart';
+import '../../../cubits/home_cubits/suggest_jobs_cubit/suggest_jobs_cubit.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_images.dart';
 import 'custom_headline_widget.dart';
@@ -15,6 +16,8 @@ class HomeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final applicationState = Provider.of<ApplicationState>(context);
+    context.read<SuggestJobsCubit>().fetchSuggestJobs();
+    // context.read<RecentJobsCubit>().fetchRecentJobs();
 
     return Padding(
       padding: const EdgeInsets.all(16.0),

@@ -52,10 +52,11 @@ class _CompanyMessagesListViewState extends State<CompanyMessagesListView> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return MessageItem(
+                return MessageCompanyItem(
                   company: title[index],
                   title: title[index],
                   image: image[index],
+                  id: index,
                 );
               },
             ),

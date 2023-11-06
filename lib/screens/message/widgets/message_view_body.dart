@@ -13,27 +13,6 @@ class MessageViewBody extends StatefulWidget {
 }
 
 class _MessageViewBodyState extends State<MessageViewBody> {
-  late TextEditingController textEditingController;
-  late ScrollController scrollController;
-
-  @override
-  void initState() {
-    textEditingController = TextEditingController();
-    scrollController = ScrollController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    textEditingController.dispose();
-    scrollController.dispose();
-    super.dispose();
-  }
-
-  // final Stream<QuerySnapshot> _messagesStream = FirebaseFirestore.instance
-  //     .collection(kMessagesCollections)
-  //     .orderBy('timeStamp', descending: true)
-  //     .snapshots();
   @override
   Widget build(BuildContext context) {
     return Column(

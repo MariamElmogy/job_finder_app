@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:job_finder_app/utils/constants.dart';
+import 'package:job_finder_app/utils/shared_prefs.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,11 +14,11 @@ class SearchJobsCubit extends Cubit<SearchJobsState> {
 
   Future<List<JobsModel>> searchJobs({required String job}) async {
     emit(SearchJobsLoading());
+    SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
 
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Dio dio = Dio();
     dio.options.headers['Authorization'] =
-        'Bearer ${sharedPreferences.getString(kUserToken)}';
+        'Bearer ${sharedPrefs.getString(kUserToken)}';
     try {
       final response = await dio.post(
         '$baseUrl/jobs/search',

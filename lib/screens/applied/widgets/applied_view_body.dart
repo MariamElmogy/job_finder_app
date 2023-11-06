@@ -15,6 +15,8 @@ class AppliedViewBody extends StatefulWidget {
 class _AppliedViewBodyState extends State<AppliedViewBody> {
   List<String> labels = ['Activate', 'Rejected'];
 
+  ScrollController jobDetailScrollController = ScrollController();
+
   int counter = 0;
 
   @override

@@ -7,20 +7,21 @@ import '../../../services/job_api_service.dart';
 part 'suggest_jobs_state.dart';
 
 class SuggestJobsCubit extends Cubit<SuggestJobsState> {
-  SuggestJobsCubit(this.jobApiService) : super(SuggestJobsInitial());
+  SuggestJobsCubit() : super(SuggestJobsInitial());
 
-   JobApiService jobApiService;
+  // JobApiService jobApiService;
 
-  List<JobsModel>? jobModel;
+  // JobsModel? jobModel;
 
   Future<void> fetchSuggestJobs() async {
     emit(SuggestJobsLoading());
     try {
-      jobModel = await JobApiService.fetchAllJobsData();
-
-      emit(SuggestJobsSuccess(jobModel!));
-    } on Exception catch (e) {
-      emit(SuggestJobsFailure(e.toString()));
+      JobsModel jobModel = await JobApiService.fetchSuggestedJobsData();
+      // Add debug log to see the response
+      emit(SuggestJobsSuccess(jobModel));
+    } catch (e) {
+      emit(SuggestJobsFailure(
+          "Failed to fetch data. Please check your internet connection."));
     }
   }
 }

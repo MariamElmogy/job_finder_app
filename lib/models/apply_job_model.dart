@@ -1,3 +1,4 @@
+import 'package:job_finder_app/utils/shared_prefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/constants.dart';
@@ -36,7 +37,7 @@ class ApplyJobsModel {
     );
   }
   Future<Map<String, dynamic>> toJson() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
     return {
       'cv_file': cv_file,
       'name': name,
@@ -44,7 +45,7 @@ class ApplyJobsModel {
       'mobile': mobile,
       'work_type': work_type,
       'other_file': other_file,
-      'user_id': sharedPreferences.getInt(kUserId),
+      'user_id': sharedPrefs.getInt(kUserId),
       'jobs_id': jobs_id,
     };
   }

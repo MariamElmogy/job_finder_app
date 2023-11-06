@@ -13,10 +13,11 @@ import 'package:http/io_client.dart';
 
 class FavoritesApiService {
   static Future<List<FavoritesJobsModel>> fetchAllFavoritesJobs() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
     final dio = Dio();
-    SharedPreferences preferences = await SharedPreferences.getInstance();
     dio.options.headers['Authorization'] =
-        'Bearer ${preferences.getString(kUserToken)}';
+        'Bearer ${sharedPreferences.getString(kUserToken)}';
     try {
       var response = await dio.get('$baseUrl/favorites');
 
@@ -48,10 +49,11 @@ class FavoritesApiService {
     }
   }
 
-
   static Future<void> addFavoritesJobs({required job_id}) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
     try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+
       HttpClient httpClient = HttpClient();
       httpClient.badCertificateCallback =
           ((X509Certificate cert, String host, int port) => true);
@@ -64,7 +66,7 @@ class FavoritesApiService {
           'job_id': job_id,
         },
         headers: {
-          'Authorization': 'Bearer ${preferences.getString(kUserToken)}',
+          'Authorization': 'Bearer ${sharedPreferences.getString(kUserToken)}',
         },
       );
 
@@ -79,9 +81,10 @@ class FavoritesApiService {
   static Dio dio = Dio();
 
   static Future<void> cancelSaveFavoriteJob(FavoritesJobsModel job) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
     dio.options.headers['Authorization'] =
-        'Bearer ${preferences.getString(kUserToken)}';
+        'Bearer ${sharedPreferences.getString(kUserToken)}';
 
     try {
       var response = await dio.delete('$baseUrl/favorites/${job.id}');
@@ -95,11 +98,12 @@ class FavoritesApiService {
       print('Error: $e');
     }
   }
-  
-  static Future<void> deleteFavoriteJob(String id) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
 
+  static Future<void> deleteFavoriteJob(String id) async {
     try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+
       HttpClient httpClient = HttpClient();
       httpClient.badCertificateCallback =
           ((X509Certificate cert, String host, int port) => true);
@@ -109,7 +113,7 @@ class FavoritesApiService {
       final response = await client.delete(
         Uri.parse(url),
         headers: {
-          'Authorization': 'Bearer ${preferences.getString(kUserToken)}',
+          'Authorization': 'Bearer ${sharedPreferences.getString(kUserToken)}',
         },
       );
 
@@ -133,4 +137,14 @@ class FavoritesApiService {
       }
     }
   }
+}
+
+JobsModel convertFavoriteToJob(FavoritesJobsModel favoriteJob) {
+  return JobsModel(
+    id: favoriteJob.job_id,
+    name: favoriteJob.job_name,
+    image: favoriteJob.job_image,
+    comp_name: favoriteJob.comp_name,
+    location: favoriteJob.location,
+  );
 }
