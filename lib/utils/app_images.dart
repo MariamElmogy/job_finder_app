@@ -82,5 +82,8 @@ abstract class AppImages {
   static const kArchiveMinusColor = 'assets/images/archive-minus-colored.png';
   static const kNoDataIlustration = 'assets/images/NoDataIlustration.png';
   static const kLogout = 'assets/images/logout.png';
-  
+  static const kMessageColor = 'assets/images/message_color.png';
+  static const kProfileColor = 'assets/images/profile_color.png';
+  static const kBriefcaseColor = 'assets/images/briefcase_color.png';
+  static const kHomeColor = 'assets/images/home_color.png';
 }

@@ -28,7 +28,6 @@ class _SplashViewState extends State<SplashView> {
     return const SplashViewBody();
   }
 
-// home:
   void navigationControl() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
@@ -40,7 +39,7 @@ class _SplashViewState extends State<SplashView> {
             context,
             MaterialPageRoute(
                 builder: (BuildContext ctx) =>
-                    email == null ? const OnBoardingView() : HomeView()));
+                    email == null ? const OnBoardingView() : const HomeView()));
       },
     );
   }

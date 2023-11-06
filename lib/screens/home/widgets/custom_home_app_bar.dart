@@ -4,6 +4,7 @@ import 'package:job_finder_app/services/user_api_service.dart';
 import 'package:job_finder_app/utils/app_colors.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 import 'package:job_finder_app/utils/app_images.dart';
+import 'package:job_finder_app/utils/constants.dart';
 
 import '../../notification/views/notification_view.dart';
 
@@ -83,8 +84,3 @@ class CustomHomeAppBar extends StatelessWidget {
   }
 }
 
-extension StringExtensions on String {
-  String capitalize() {
-    return "${this[0].toUpperCase()}${substring(1)}";
-  }
-}

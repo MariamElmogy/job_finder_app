@@ -9,27 +9,28 @@ class SearchBarViewFutureBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SearchJobsCubit(),
-      child: FutureBuilder(
-        future: JobApiService.fetchAllJobsData(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasError) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return SearchBarListView(jobsModel: snapshot.data!);
+    return BlocBuilder<SearchJobsCubit, SearchJobsState>(
+      builder: (context, state) {
+        return FutureBuilder(
+          future: JobApiService.fetchAllJobsData(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasError) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return SearchBarListView(jobsModel: snapshot.data!);
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
             } else {
-              return const Center(child: CircularProgressIndicator());
+              return Text(
+                snapshot.error.toString(),
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+              );
             }
-          } else {
-            return Text(
-              snapshot.error.toString(),
-              style: const TextStyle(
-                color: Colors.white,
-              ),
-            );
-          }
-        },
-      ),
+          },
+        );
+      },
     );
   }
 }

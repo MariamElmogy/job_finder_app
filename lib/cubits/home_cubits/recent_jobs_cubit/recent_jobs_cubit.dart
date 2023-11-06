@@ -12,7 +12,7 @@ class RecentJobsCubit extends Cubit<RecentJobsState> {
 
   List<JobsModel>? jobModel;
 
-  Future<void> fetchRecentJobs() async {
+  Future<List<JobsModel>?> fetchRecentJobs() async {
     emit(RecentJobsLoading());
     try {
       jobModel = await JobApiService.fetchAllJobsData();
@@ -21,5 +21,6 @@ class RecentJobsCubit extends Cubit<RecentJobsState> {
     } on Exception catch (e) {
       emit(RecentJobsFailure(e.toString()));
     }
+    return null;
   }
 }

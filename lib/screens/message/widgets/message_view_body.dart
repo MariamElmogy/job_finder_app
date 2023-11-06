@@ -15,14 +15,16 @@ class MessageViewBody extends StatefulWidget {
 class _MessageViewBodyState extends State<MessageViewBody> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        Padding(
-          padding: EdgeInsets.all(16.0),
-          child: CustomSearchMessage(),
-        ),
-        CompanyMessagesListView(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: const [
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: CustomSearchMessage(),
+          ),
+          CompanyMessagesListView(),
+        ],
+      ),
     );
   }
 }

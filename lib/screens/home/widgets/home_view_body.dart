@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:job_finder_app/cubits/home_cubits/recent_jobs_cubit/recent_jobs_cubit.dart';
+import 'package:job_finder_app/cubits/home_cubits/search_jobs_cubit/search_jobs_cubit.dart';
 import 'package:job_finder_app/screens/home/widgets/recent_job_view_future_builder.dart';
 import 'package:job_finder_app/screens/home/widgets/successful_applying_view_future_builder.dart';
 import 'package:job_finder_app/screens/home/widgets/suggest_job_view_futureBuilder.dart';
 import 'package:job_finder_app/screens/search/views/search_view.dart';
 import 'package:provider/provider.dart';
 import '../../../cubits/home_cubits/suggest_jobs_cubit/suggest_jobs_cubit.dart';
+import '../../../services/job_api_service.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_images.dart';
 import 'custom_headline_widget.dart';
@@ -16,8 +20,6 @@ class HomeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final applicationState = Provider.of<ApplicationState>(context);
-    context.read<SuggestJobsCubit>().fetchSuggestJobs();
-    // context.read<RecentJobsCubit>().fetchRecentJobs();
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -32,7 +34,10 @@ class HomeViewBody extends StatelessWidget {
               child: GestureDetector(
                 onTap: () => Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return const SearchView();
+                    return BlocProvider(
+                      create: (context) => SearchJobsCubit(),
+                      child: const SearchView(),
+                    );
                   },
                 )),
                 child: Container(
@@ -73,8 +78,11 @@ class HomeViewBody extends StatelessWidget {
               child: CustomHeadlineWidget(title: 'Suggested Job'),
             ),
           ),
-          const SliverToBoxAdapter(
-            child: SuggestJobViewFutureBuilder(),
+          SliverToBoxAdapter(
+            child: BlocProvider(
+              create: (context) => SuggestJobsCubit(),
+              child: const SuggestJobViewFutureBuilder(),
+            ),
           ),
           const SliverToBoxAdapter(
             child: Padding(
@@ -82,10 +90,13 @@ class HomeViewBody extends StatelessWidget {
               child: CustomHeadlineWidget(title: 'Recent Job'),
             ),
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: RecentJobViewFutureBuilder(),
+              padding: const EdgeInsets.all(8.0),
+              child: BlocProvider<RecentJobsCubit>(
+                create: (context) => RecentJobsCubit(JobApiService()),
+                child: const RecentJobViewFutureBuilder(),
+              ),
             ),
           ),
         ],

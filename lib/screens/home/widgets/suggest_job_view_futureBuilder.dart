@@ -17,6 +17,8 @@ class _SuggestJobViewFutureBuilderState
     extends State<SuggestJobViewFutureBuilder> {
   @override
   Widget build(BuildContext context) {
+    context.read<SuggestJobsCubit>().fetchSuggestJobs();
+
     return BlocBuilder<SuggestJobsCubit, SuggestJobsState>(
       builder: (context, state) {
         if (state is SuggestJobsLoading) {

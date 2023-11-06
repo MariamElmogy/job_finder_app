@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/screens/home/widgets/custom_home_app_bar.dart';
 import 'package:job_finder_app/screens/profile/widgets/profile_information.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
-import 'package:job_finder_app/utils/shared_prefs.dart';
+import 'package:job_finder_app/utils/constants.dart';
+
+import '../../../utils/shared_prefs.dart';
 
 class ProfileDetails extends StatelessWidget {
   const ProfileDetails({

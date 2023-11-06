@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/models/user_portofolio_model.dart';
-import 'package:job_finder_app/utils/app_colors.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
-import 'package:job_finder_app/utils/app_images.dart';
 
 class ProfileUserAbout extends StatelessWidget {
   const ProfileUserAbout({
@@ -48,7 +45,7 @@ class ProfileUserAbout extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           const Text(
-            'I\'m Maya, I’m UI/UX Designer, I have experience designing UI Design for approximately 1 year. I am currently joining the Vektora studio team based in Surakarta, Indonesia.I am a person who has a high spirit and likes to work to achieve what I dream of.',
+            'Bio...',
             style: TextStyle(
               fontSize: 14,
               color: Color(0xff6B7280),

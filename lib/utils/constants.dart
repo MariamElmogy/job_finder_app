@@ -48,3 +48,10 @@ int convertTime(String time) {
 
   return daysDifference;
 }
+
+
+extension StringExtensions on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${substring(1)}";
+  }
+}

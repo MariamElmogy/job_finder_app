@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/custom_widgets/custom_success_processes.dart';
 import 'package:job_finder_app/screens/login/views/login_view.dart';

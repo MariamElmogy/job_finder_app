@@ -20,11 +20,11 @@ class ProfileInformation extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              ProfileSingleInformation(title: 'Applied', numbers: '46'),
+              ProfileSingleInformation(title: 'Applied', numbers: '1'),
               VerticalDivider(thickness: 2),
-              ProfileSingleInformation(title: 'Reviewed', numbers: '23'),
+              ProfileSingleInformation(title: 'Reviewed', numbers: '0'),
               VerticalDivider(thickness: 2),
-              ProfileSingleInformation(title: 'Contacted', numbers: '16'),
+              ProfileSingleInformation(title: 'Contacted', numbers: '0'),
             ],
           ),
         ),

@@ -21,6 +21,8 @@ class _SavedJobViewFutureBuilderState extends State<SavedJobViewFutureBuilder> {
       builder: (context, snapshot) {
         if ((snapshot.data?.isEmpty ?? true)) {
           return const NoSavedJobs();
+        } else {
+          const Center(child: CircularProgressIndicator());
         }
         if (!snapshot.hasError) {
           if (snapshot.connectionState == ConnectionState.done) {
