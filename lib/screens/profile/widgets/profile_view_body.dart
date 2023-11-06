@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:job_finder_app/cubits/profile_cubit/profile_cubit.dart';
 import 'package:job_finder_app/screens/profile/widgets/profile_details.dart';
 import 'package:job_finder_app/screens/profile/widgets/profile_user_about.dart';
 import 'package:job_finder_app/screens/profile/widgets/user_profile_image.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
-import 'package:job_finder_app/utils/app_images.dart';
 
 import 'general_list_view.dart';
 import 'others_list_view.dart';

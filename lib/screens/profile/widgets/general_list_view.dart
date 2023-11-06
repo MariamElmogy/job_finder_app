@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_finder_app/screens/profile/widgets/portfolio_view.dart';
 import 'package:job_finder_app/utils/app_colors.dart';
 import 'package:job_finder_app/utils/app_fonts.dart';
 import 'package:job_finder_app/utils/app_images.dart';
 
+import '../../../cubits/cv_portfolio_cubit/cv_portfolio_cubit.dart';
 import '../edit_profile/views/edit_profile_view.dart';
 import '../languages/views/language_view.dart';
 import '../login_and_security/views/login_and_security_view.dart';
 import '../notification_settings/views/notification_settings_view.dart';
+
 class GeneralListView extends StatefulWidget {
   const GeneralListView({
     super.key,
@@ -35,7 +38,10 @@ class _GeneralListViewState extends State<GeneralListView> {
 
   List<dynamic> screen = [
     const EditProfileView(),
-    const PortfolioView(),
+    BlocProvider(
+      create: (context) => CvPortfolioCubit(),
+      child: const PortfolioView(),
+    ),
     const LanguageView(),
     const NotificationSettingsView(),
     const LoginAndSecurityView()

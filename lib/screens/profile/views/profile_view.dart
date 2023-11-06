@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_finder_app/screens/login/views/login_view.dart';
 import 'package:job_finder_app/screens/profile/widgets/profile_view_body.dart';
 import 'package:job_finder_app/utils/app_images.dart';
 import 'package:job_finder_app/utils/constants.dart';
+
+import '../../../cubits/profile_cubit/profile_cubit.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -41,8 +44,11 @@ class ProfileView extends StatelessWidget {
                 ),
               ],
             ),
-            const SliverToBoxAdapter(
-              child: ProfileViewBody(),
+            SliverToBoxAdapter(
+              child: BlocProvider(
+                create: (context) => ProfileCubit(),
+                child: const ProfileViewBody(),
+              ),
             ),
           ],
         ),
