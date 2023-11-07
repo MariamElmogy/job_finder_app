@@ -1,6 +1,3 @@
-// import 'package:job_finder_app/utils/constants.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants.dart';
@@ -34,70 +31,25 @@ class SharedPrefs {
     _sharedPrefs.setString(kUserId, value);
   }
 
+  String get email => _sharedPrefs.getString(kEmail) ?? "";
+
+  set email(String value) {
+    _sharedPrefs.setString(kEmail, value);
+  }
+
+  void removeEmail() {
+    _sharedPrefs.remove(kEmail);
+  }
+
   String get imgUrl => _sharedPrefs.getString(kImgUrl) ?? "";
 
   set imgUrl(String value) {
     _sharedPrefs.setString(kImgUrl, value);
   }
 
-  // Future<void> setUserId(int value) async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   await prefs.setInt(kUserId, value);
-  // }
-
-  // Future<int?> getUserId() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   return prefs.getInt(kUserId);
-  // }
-
-//   Future<void> setJobId(int value) async {
-//     final prefs = await SharedPreferences.getInstance();
-//     await prefs.setInt(kJobId, value);
-//   }
-
-//   Future<int?> getJobId() async {
-//     final prefs = await SharedPreferences.getInstance();
-//     return prefs.getInt(kJobId);
-//   }
-
-//   Future<void> setUserEmail(String value) async {
-//     final prefs = await SharedPreferences.getInstance();
-//     await prefs.setString(kEmail, value);
-//   }
-
-//   Future<String?> getUserEmail() async {
-//     final prefs = await SharedPreferences.getInstance();
-//     return prefs.getString(kEmail);
-//   }
-
-//   Future<bool?> removeUserEmail() async {
-//     final prefs = await SharedPreferences.getInstance();
-//     return prefs.remove(kEmail);
-//   }
-
-//   Future<void> setUserToken(String value) async {
-//     final prefs = await SharedPreferences.getInstance();
-//     await prefs.setString(kUserToken, value);
-//   }
-
-//   get getUserToken async {
-//     final prefs = await SharedPreferences.getInstance();
-//     return prefs.getString(kUserToken);
-//   }
-
   String get username => _sharedPrefs.getString(kUserName) ?? "";
 
   set username(String value) {
     _sharedPrefs.setString(kUserName, value);
   }
-
-  // Future<void> setUserName(String value) async {
-  //   // final prefs = await SharedPreferences.getInstance();
-  //   await _sharedPrefs?.setString(kUserName, value);
-  // }
-
-  // Future<String?> getUserName() async {
-  //   // final prefs = await SharedPreferences.getInstance();
-  //   return _sharedPrefs?.getString(kUserName);
-  // }
 }

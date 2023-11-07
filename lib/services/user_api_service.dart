@@ -21,7 +21,7 @@ class UserApiService {
     final response = await client.get(
       Uri.parse('$baseUrl/auth/profile'),
       headers: {
-        'Authorization': 'Bearer ${SharedPrefs().token}',
+        'Authorization': 'Bearer ${sharedPreferences.get(kUserToken)}',
       },
     );
     log(response.statusCode.toString());

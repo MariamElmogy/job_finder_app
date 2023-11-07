@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:http/http.dart';
 import 'package:http/io_client.dart';
-import 'package:job_finder_app/utils/shared_prefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/constants.dart';
@@ -13,6 +12,8 @@ import '../models/user_portofolio_model.dart';
 class UserProfileApiService {
   static Future<void> addUserImage({required File image}) async {
     try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
       HttpClient httpClient = HttpClient();
       httpClient.badCertificateCallback =
           ((X509Certificate cert, String host, int port) => true);
@@ -21,7 +22,7 @@ class UserProfileApiService {
       final response = await client.post(
         Uri.parse(url),
         headers: {
-          'Authorization': 'Bearer ${SharedPrefs().token}',
+          'Authorization': 'Bearer ${sharedPreferences.get(kUserToken)}',
         },
         body: {'image': image},
       );
@@ -39,17 +40,14 @@ class UserProfileApiService {
     httpClient.badCertificateCallback =
         ((X509Certificate cert, String host, int port) => true);
     Client client = IOClient(httpClient);
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     final response = await client.get(
       Uri.parse('$baseUrl/user/profile/portofolios'),
       headers: {
-        'Authorization': 'Bearer ${sharedPreferences.getString(kUserToken)}',
+        'Authorization': 'Bearer ${sharedPreferences.get(kUserToken)}',
       },
     );
-
-    log(response.statusCode.toString());
-
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response, then parse the JSON.
       final data = jsonDecode(response.body)['data']['portfolio'];
@@ -66,6 +64,7 @@ class UserProfileApiService {
         throw Exception('Invalid data format for portfolio');
       }
     } else if (response.statusCode == 404) {
+      log('here no data');
       // Handle the case where there is no data
       return null;
     } else {

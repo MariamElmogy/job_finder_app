@@ -44,11 +44,8 @@ class ProfileView extends StatelessWidget {
                 ),
               ],
             ),
-            SliverToBoxAdapter(
-              child: BlocProvider(
-                create: (context) => ProfileCubit(),
-                child: const ProfileViewBody(),
-              ),
+            const SliverToBoxAdapter(
+              child: ProfileViewBody(),
             ),
           ],
         ),

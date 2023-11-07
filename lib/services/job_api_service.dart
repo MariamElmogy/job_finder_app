@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:job_finder_app/models/apply_job_model.dart';
-import 'package:job_finder_app/utils/shared_prefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/jobs_model.dart';
@@ -72,9 +71,7 @@ class JobApiService {
     http.Client client = IOClient(httpClient);
     final response = await client.get(
       Uri.parse('$baseUrl/jobs/sugest/5'),
-      headers: {
-        'Authorization': 'Bearer ${sharedPreferences.getString(kUserToken)}'
-      },
+      headers: {'Authorization': 'Bearer ${sharedPreferences.getString(kUserToken)}'},
     );
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body)['data'];
@@ -94,10 +91,10 @@ class JobApiService {
       required otherFile,
       required jobId}) async {
     var dio = Dio();
-    // dio.options.followRedirects = true; // Allow following redirects
-    // dio.options.maxRedirects = 5; // Maximum number of redirects to follow
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-    dio.options.headers['Authorization'] = 'Bearer ${SharedPrefs().token}';
+    dio.options.headers['Authorization'] =
+        'Bearer ${sharedPreferences.getString(kUserToken)}';
     FormData formData = FormData.fromMap({
       'cv_file': await MultipartFile.fromFile(cvFile!.path),
       'other_file': await MultipartFile.fromFile(otherFile!.path),
@@ -106,11 +103,10 @@ class JobApiService {
       'work_type': selectedWorkType,
       'mobile': phone,
       'jobs_id': jobId,
-      'user_id': SharedPrefs().userId,
+      'user_id': sharedPreferences.get(kUserId),
     });
 
-    SharedPrefs().jobId = jobId;
-
+    sharedPreferences.setInt(kJobId, jobId);
     log('Job = $jobId');
 
     var response = await dio.post('$baseUrl/apply', data: formData);
@@ -124,13 +120,15 @@ class JobApiService {
   }
 
   static Future<JobsModel> fetchSuccessfulApplyingJob() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
     HttpClient httpClient = HttpClient();
     httpClient.badCertificateCallback =
         ((X509Certificate cert, String host, int port) => true);
     http.Client client = IOClient(httpClient);
     final response = await client.get(
-      Uri.parse('$baseUrl/jobs/${SharedPrefs().jobId}'),
-      headers: {'Authorization': 'Bearer ${SharedPrefs().token}'},
+      Uri.parse('$baseUrl/jobs/${sharedPreferences.getInt(kJobId)}'),
+      headers: {'Authorization': 'Bearer ${sharedPreferences.getString(kUserToken)}'},
     );
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body)['data'];
@@ -148,8 +146,7 @@ class JobApiService {
       final dio = Dio();
       dio.options.headers['Authorization'] =
           'Bearer ${sharedPreferences.getString(kUserToken)}';
-      var response =
-          await dio.get('$baseUrl/apply/${sharedPreferences.getInt(kUserId)}');
+      var response = await dio.get('$baseUrl/apply/${sharedPreferences.getInt(kUserId)}');
 
       List<ApplyJobsModel> jobs = [];
       var items = response.data['data'];
@@ -165,5 +162,32 @@ class JobApiService {
     } catch (e) {
       throw Exception(e.toString());
     }
+  }
+
+  static Future<List<JobsModel>> searchJobs({required String job}) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    Dio dio = Dio();
+    dio.options.headers['Authorization'] =
+        'Bearer ${sharedPreferences.getString(kUserToken)}';
+    try {
+      final response = await dio.post(
+        '$baseUrl/jobs/search',
+        data: {
+          'name': job,
+        },
+      );
+      if (response.statusCode == 200) {
+        var data = response.data['data'];
+        List<JobsModel> jobList = List.from(data)
+            .map((jobData) => JobsModel.fromJson(jobData))
+            .toList();
+
+        return jobList;
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    return [];
   }
 }

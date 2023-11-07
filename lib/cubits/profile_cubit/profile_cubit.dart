@@ -14,11 +14,11 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       UserPortofolioModel? userPortofolioModel =
           await UserProfileApiService.fetchUserPortofolio();
-       if (userPortofolioModel != null) {
-      emit(ProfileSuccess(userPortofolio: userPortofolioModel));
-    } else {
-      emit(ProfileNoData());
-    }
+      if (userPortofolioModel != null) {
+        emit(ProfileSuccess(userPortofolio: userPortofolioModel));
+      } else {
+        emit(ProfileNoData());
+      }
     } catch (e) {
       emit(ProfileFailure(errMessage: 'An error occurred: $e'));
     }

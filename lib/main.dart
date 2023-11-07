@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_finder_app/screens/home/views/home_view.dart';
 import 'package:job_finder_app/screens/home/widgets/home_view_body.dart';
 import 'package:job_finder_app/screens/login/views/login_view.dart';
@@ -9,6 +10,7 @@ import 'package:job_finder_app/utils/app_colors.dart';
 import 'package:job_finder_app/utils/shared_prefs.dart';
 import 'package:provider/provider.dart';
 
+import 'cubits/profile_cubit/profile_cubit.dart';
 import 'screens/on_boarding/views/on_boarding_view.dart';
 import 'screens/splash/views/splash_view.dart';
 
@@ -27,9 +29,8 @@ class JobFinderApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => ApplicationState(),
-        ),
+        ChangeNotifierProvider(create: (context) => ApplicationState()),
+        BlocProvider(create: (context) => ProfileCubit()),
       ],
       child: MaterialApp(
         title: 'Job Finder',

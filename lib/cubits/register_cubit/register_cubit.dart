@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:job_finder_app/utils/constants.dart';
-import 'package:job_finder_app/utils/shared_prefs.dart';
 
 import 'package:meta/meta.dart';
 
@@ -24,8 +23,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body.toString());
-        log(data['name']);
-        SharedPrefs().username = data['name'];
+
         emit(RegisterSuccess());
       }
     } catch (e) {
